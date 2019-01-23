@@ -1,0 +1,59 @@
+head
+{
+	padding: = 0px;
+	margin: = 0px;
+	border: = 0px;
+}
+
+.uploadbox
+{
+	position: relative;
+	left: 33%;
+	width: 33%;
+	height: 33%;
+	border:1px solid #a5a5a5;
+	background-color:#f8f9fa;
+	text-align:center;
+}
+
+.upload
+{
+	top: 1%;
+	left: -1%;
+	Position: relative;
+	text-align:center;
+}
+
+.historybox
+{
+	position: relative;
+	top: 15%;
+	left: 33%;
+	width: 33%;
+	height: 33%;
+	border:1px solid #a5a5a5;
+	background-color:#f8f9fa;
+	text-align:center;
+}
+
+
+.examtable
+{
+	position: relative;
+	left:15%;
+}
+table.comments {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td.comments {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) .comments {
+  background-color: #dddddd;
+}

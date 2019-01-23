@@ -1,0 +1,6 @@
+cramsay@dundee.ac.uk: Hey, your exam needs some work.
+ddatanasov@dundee.ac.uk: Hey Craig, which parts need improvement, in your opinion?
+cramsay@dundee.ac.uk: Well question 5 is a little vague.
+ddatanasov@dundee.ac.uk: I see, I'll work on it! Anything else in particular?
+cramsay@dundee.ac.uk: Nothing in particular, however, the style in a bit informal, it's an official exam after all.
+ddatanasov@dundee.ac.uk: Got it!
