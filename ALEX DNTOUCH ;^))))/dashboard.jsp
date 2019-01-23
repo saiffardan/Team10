@@ -46,6 +46,7 @@
 	<br>
 	<li> <a href = "">  </a> </li>
 	<br>
+	
 	</div>
 	
 	<div class = "exambox">
@@ -57,16 +58,6 @@
 	 <br>
 	<li> <a href = ""> Example exam </a> </li>
 	<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
-	</div>
-	
-	<div class = "historybox">
-	<h1> Admin tools </h1>
-	<li> <a href = "useraccount.jsp"> Account Oversee</li>
-	<br>
-	<li> <a href = "createAccount.jsp">  Create Account</li>
-	<br>
-	<li> <a href = "exam.jsp">Full Exam listing</li>
-	<br>
 	</div>
 
     </body>

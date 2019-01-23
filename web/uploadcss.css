@@ -1,8 +1,8 @@
 head
 {
-	padding: = 0px;
-	margin: = 0px;
-	border: = 0px;
+	padding: 0px;
+	margin: 5px;
+	border: 0px;
 }
 
 div.userpass
@@ -32,6 +32,16 @@ div.loginerror
 	background-color:#f8f9fa;
 	text-align:center;
 }
+.exambox
+{
+	position: relative;
+	left: 33%;
+	width: 33%;
+	height: 33%;
+	border:1px solid #a5a5a5;
+	background-color:#f8f9fa;
+	text-align:center;
+}
 
 .upload
 {
@@ -51,6 +61,7 @@ div.loginerror
 	border:1px solid #a5a5a5;
 	background-color:#f8f9fa;
 	text-align:center;
+
 }
 
 
@@ -74,6 +85,7 @@ td.comments {
 tr:nth-child(even) .comments {
   background-color: #dddddd;
 }
+
 .sidebar
 {
 	position: absolute;
