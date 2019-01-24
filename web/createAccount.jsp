@@ -63,20 +63,26 @@
 			</table>
 		</form>
 		<%
+			// Read parameters in form and store in strings
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String email = request.getParameter("email");
 			String role = request.getParameter("role");
 			
 			// File creation
-			String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/accounts.txt";
-			File strFile = new File(strPath);
-			boolean fileCreated = strFile.createNewFile();
+			String strPath = "V:/exams/accounts.txt";
+                        FileWriter fw = new FileWriter(strPath, true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+			//File strFile = new File(strPath);
+			//boolean fileCreated = strFile.createNewFile();
 			// File appending
-			Writer objWriter = new BufferedWriter(new FileWriter(strFile));
-			objWriter.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
-			objWriter.flush();
-			objWriter.close();
+                        bw.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
+                        bw.newLine();
+                        bw.close();
+			//Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
+			//objWriter.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
+			//objWriter.flush();
+			//objWriter.close();
 		%>
 	</body>
 </html>

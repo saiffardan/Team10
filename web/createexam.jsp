@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class=container>
-            <form class="form-signup" method="post">
+            <form class="form-signup" action="CreateNewExam" method="post">
                     <h1 class="h3 mb-3 font-weight-normal">Create New Exam</h1>
                     <label for="inputModuleCode" class="sr-only">Module Code</label>
                     <input type="text" id="inputModuleCode" name="modulecode" class="form-control" placeholder="Module Code" required autofocus>
@@ -54,7 +54,7 @@
                             <option>Main</option>
                             <option>Resit</option>
                     </select>
-                    <select id="inputUndergrad" name="underegrad" class="form-control" placeholder="Undergraduate or Postgraduate" required>
+                    <select id="inputUndergrad" name="undergrad" class="form-control" placeholder="Undergraduate or Postgraduate" required>
                             <option value="" disabled selected>Undergraduate or Postgraduate</option>
                             <option>Undergraduate</option>
                             <option>Postgraduate</option>

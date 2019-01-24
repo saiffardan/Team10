@@ -40,10 +40,11 @@ public class PostComment extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             if(request.getParameter("comment") != null){
                 String username = request.getParameter("username");
+                String strPath = request.getParameter("folderpath");
                 //File creation
                 //String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/newcomment.txt";
                 //String strPath = "/exams/newcomment.txt";
-                String strPath = "X:/exams/newcomment.txt";
+                //String strPath = getServletContext().getRealPath("/").substring(0,2) + "/exams/newcomment.txt";
                 File strFile = new File(strPath);
                 boolean fileCreated = strFile.isFile();
                 strFile.createNewFile();
@@ -54,7 +55,7 @@ public class PostComment extends HttpServlet {
                 objWriter.flush();
                 objWriter.close();
                 //request.getRequestDispatcher("exam.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/exam.jsp");
+                response.sendRedirect(request.getContextPath() + "/exam.jsp?folder=" + request.getParameter("modulecode"));
             }
         }
     }

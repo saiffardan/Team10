@@ -52,42 +52,39 @@
 	</nav>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
-        
+    <body> 
         <table class="other">
-            <tr>
-                <td>Module Code</td>
-                <td>AC123</td>
-            </tr>
-            <tr>
-                <td>Module Title</td>
-                <td>Games Programming</td>
-            </tr>
-            <tr>
-                <td>Author</td>
-                <td>DDA</td>
-            </tr>
-            <tr>
-                <td>Academic Year</td>
-                <td>2018/2019</td>
-            </tr>
-            <tr>
-                <td>Online or Paper</td>
-                <td>Online</td>
-            </tr>
-            <tr>
-                <td>Main or Resit</td>
-                <td>Main</td>
-            </tr>
-            <tr>
-                <td>Undergraduate or Postgraduate</td>
-                <td>Postgraduate</td>
-            </tr>
-            <tr>
-                <td>Progress</td>
-                <td>In progress</td>
-            </tr>
+            <%
+                String folder = request.getParameter("folder").toString();
+                String[] titles = {"Module Code", "Module Title", "Author", "Academic Year", "Semester",  "Online or Paper", "Main or Resit", "Undergraduate or Postgraduate", "Progress"};
+                BufferedReader br1 = new BufferedReader(new FileReader(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt"));
+                try {
+                    String data;
+                    int counter = 0;
+                        while((data= br1.readLine())!= null)
+                        {
+                            out.println("<tr>");
+                            out.println("<td>" + titles[counter] + "</td>");
+                            counter++;
+                            out.println("<td>" + data + "</td>");
+                            out.println("</tr>");
+                        }
+                }catch(Exception e){
+                e.printStackTrace();
+                } finally {
+                    br1.close();
+                }
+            %>
         </table>
+        
+        <h4>File Upload:</h4>
+        Select a file to upload: <br />
+        <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
+           <input type = "file" name = "file" size = "50" />
+           <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Draft.txt"%>">
+           <br />
+           <input type = "submit" value = "Upload File" />
+        </form>
         
         <table class="comments">
             <tr>
@@ -96,7 +93,7 @@
             </tr>
         
         <%
-            BufferedReader br = new BufferedReader(new FileReader("X:/exams/newcomment.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"));
             try {
                 String data;
                     while((data= br.readLine())!= null)
@@ -120,14 +117,11 @@
         <form action="PostComment" method="POST">
             <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
             <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
+            <input type="hidden" name="modulecode" value="<%= folder%>">
+            <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"%>">
             <br>
             <input type="submit">
         </form>
         <button type="button" onclick="window.location = window.location.href">Reload</button>
-        
-        <div class= "upload">
-            <p>filename.txt</p>
-            <button type="button" class="btn btn-primary">Upload</button>
-        </div>
     </body>
 </html>
