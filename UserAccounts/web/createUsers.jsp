@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
  <%@page import="java.sql.*,java.*"%>
+  <%@page import="javax.sql.*,java.*"%>
   <%@page import="java.io.IOException"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -24,7 +25,7 @@
     <body>
         <h1>Hello World!</h1>
         <%
-            
+          
         if(request.getParameter("submit") != null){
 
         	System.out.print("Welcome Home!!");
@@ -35,7 +36,9 @@
                 //String email=request.getParameter("email");
 
             try {
-                    Class.forName("com.mysql.jdbc.Driver");
+                    
+                    DriverManager.registerDriver();
+                     Class.forName("com.mysql.jdbc.Driver"); 
                     //get a connection to database
                     Connection myConn = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db", "18agileteam10","7621.at10.1267");
                     //create a statement 
@@ -64,7 +67,7 @@
         
         %>
 
-<div><form name="formaccounts" action="createUsers.jsp" method="GET">
+<div><form name="formaccounts" action="createUsers.jsp" method="POST">
             Email: <br/>
                 <input name="Email" type="text"><br/>
             User Name  : <br/>  <input name="Username" type="text"><br/>

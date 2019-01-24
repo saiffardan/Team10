@@ -7,12 +7,10 @@
    </head>
 
    <body>
-       <%
-       out.println(TestingSomething.molqte());
-       out.println(TestingSomething.readFromFile("fileToBeRead.txt"));
-          %>
-      <% out.println("heo");
-          %>
-   
+       <p>Helloooo</p>
+       <form action="danchoservlet2" method="post">
+        First name: <input type="text" name="fname"><br>
+        <input type="submit" value="Submit">
+      </form>
    </body>
 </html>

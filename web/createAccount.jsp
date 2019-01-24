@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head><title>Finna testing some account creation</title><head>
+	<head><title>Create new account</title><head>
 	<body>
 		<form method="post">
 			<table border="5" cellpadding="5" cellspacing="5">
@@ -20,6 +20,10 @@
 				<tr>
 					<td>Enter password: </td>
 					<td><input type="password" name="password" size="20" placeholder="ExamplePassword123..."/></td>
+				</tr>
+				<tr>
+					<td>Re-enter password: </td>
+					<td><input type="password" name="passwordConfirm" size="20" placeholder="ExamplePassword123..."/></td>
 				</tr>
 				<tr>
 					<td>Enter email: </td>
