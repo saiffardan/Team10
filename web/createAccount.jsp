@@ -9,7 +9,27 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head><title>Create new account</title><head>
+	<head>
+		<title>Create new account</title>
+		
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link href="uploadcss.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="dashboard.jsp">
+						<img alt="Uni of Dundee crest" src="Dundeebadge.png" height="50" width="50"> 
+					</a>
+				</div>
+
+				<a href="logout.jsp"> <button type="button" class="btn btn-default navbar-btn"style="float:right">Logout</button>  </a>
+			</div>
+		</nav>
+	</head>
+	
 	<body>
 		<form method="post">
 			<table border="5" cellpadding="5" cellspacing="5">
@@ -20,10 +40,6 @@
 				<tr>
 					<td>Enter password: </td>
 					<td><input type="password" name="password" size="20" placeholder="ExamplePassword123..."/></td>
-				</tr>
-				<tr>
-					<td>Re-enter password: </td>
-					<td><input type="password" name="passwordConfirm" size="20" placeholder="ExamplePassword123..."/></td>
 				</tr>
 				<tr>
 					<td>Enter email: </td>

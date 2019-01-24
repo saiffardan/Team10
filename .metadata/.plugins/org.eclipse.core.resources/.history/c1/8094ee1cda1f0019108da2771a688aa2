@@ -1,0 +1,21 @@
+    <%@ page import = "java.sql.Connection"%>
+    <%@ page import = "anothertrial.DbManager"%>
+    <%@ page import = "java.sql.DriverManager"%>
+    <%@ page language = "java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import = "java.sql.Connection"%>
+    
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	DbManager mdb = new DbManager();
+	Connection conn = db.getConnection();
+%>
+</body>
+</html>

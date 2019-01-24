@@ -84,9 +84,15 @@
 		
 		<script>
 			function testFunction() {
-				document.getElementById("progBar1").style.width = "99%";
-				document.getElementById("progBar2").style.width = "99%";
-				document.getElementById("progBar3").style.width = "99%";
+				if(document.getElementById("progBar1").style.width >= "25%"){
+					document.getElementById("progBar1").style.width = "100%";
+					document.getElementById("progBar2").style.width = "100%";
+					document.getElementById("progBar3").style.width = "100%";
+				} else {
+					document.getElementById("progBar1").style.width = "75%";
+					document.getElementById("progBar2").style.width = "50%";
+					document.getElementById("progBar3").style.width = "25%";
+				}
 			}
 		</script>
 		

@@ -3,6 +3,7 @@
     Created on : 23-Jan-2019, 13:22:20
     Author     : danchoatanasov
 --%>
+<%@page import="java.io.FileReader"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -52,23 +53,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <%
-        if(request.getParameter("comment") != null){
-            //File creation
-            String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/newcomment.txt";
-            File strFile = new File(strPath);
-            boolean fileCreated = strFile.isFile();
-            strFile.createNewFile();
-            //File appending
-            Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
-            objWriter.write(session.getAttribute("username") + ": ");
-            objWriter.write(request.getParameter("comment").toString() + "\r\n");
-            objWriter.flush();
-            objWriter.close();
-        }
         
-        %>
-       
         <table class="other">
             <tr>
                 <td>Module Code</td>
@@ -109,19 +94,11 @@
                 <th>Username</th>
                 <th>Comment</th>
             </tr>
+        
         <%
-            String fileName = "/exams/newcomment.txt";
-            InputStream ins = application.getResourceAsStream(fileName);
-            try
-            {
-                if(ins == null)
-                {
-                    response.setStatus(response.SC_NOT_FOUND);
-                }
-                else
-                {
-                    BufferedReader br = new BufferedReader((new InputStreamReader(ins)));
-                    String data;
+            BufferedReader br = new BufferedReader(new FileReader("X:/exams/newcomment.txt"));
+            try {
+                String data;
                     while((data= br.readLine())!= null)
                     {
                         out.println("<tr>");
@@ -132,16 +109,17 @@
                         }
                         out.println("</tr>");
                     }
-                } 
-            }
-            catch(IOException e)
-            {
-            out.println(e.getMessage());
+            }catch(Exception e){
+            e.printStackTrace();
+            } finally {
+                br.close();
             }
         %>
+        
         </table>
-        <form action="exam.jsp" method="POST">
+        <form action="PostComment" method="POST">
             <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
+            <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
             <br>
             <input type="submit">
         </form>
