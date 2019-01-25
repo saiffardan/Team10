@@ -27,6 +27,8 @@
 	
 	
     <body>
+			<div class = "loginbg">
+		</div>
 		<div class = "sidebar">
 			<h1> Account settings </h1>
 			<br>
@@ -77,7 +79,7 @@
 			<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
 			<a onclick="testFunction()"> <button type="button" class="btn btn-default navbar-btn">Click me</button></a>
 		</div>
-                    
+                    <br>
 		<div class = "historybox">
 			<h1> Admin tools </h1>
 			<li> <a href = "useraccount.jsp"> Account Oversee</li>
@@ -88,6 +90,7 @@
 			<br>
 		</div>
 		
+
 		<script>
                     function testFunction() {
                         var i;

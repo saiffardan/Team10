@@ -1,6 +1,5 @@
 <html>
-
-
+  
   <link href="uploadcss.css" rel="stylesheet" type="text/css"> 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <head>
@@ -16,7 +15,8 @@
     <%@ include file="parts/head.jsp" %>
 </head>
 <body>
-    <div class="loginerror">
+
+    <div class="loginbg">
 
 	</div>
 	

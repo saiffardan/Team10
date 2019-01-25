@@ -4,18 +4,33 @@ head
 	margin: 5px;
 	border: 0px;
 }
-
-div.userpass
+.loginbg
 {
-	position:relative;
-	left:33%;
-	width: 33%;
-	height: 21%;
+
+  position:fixed;
+  background-image: url("Bgimg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width:100%;
+  height:100%;
+  filter: brightness(50%);
+  
+}
+  div.userpass
+{
+	
+	position:absolute;
+	padding:15px;
+	left:37%;
+	top:35%;
+	width: auto;
+	height: auto;
 	display: inline-block;
 	text-align: center;
 	float:center;
 	border:1px solid #a5a5a5;
-	background-color:#9ca6ff;
+	background-color:#edebe9;
+	opacity:0.96;
 }
 .commenttable
 {
@@ -98,7 +113,10 @@ td.comments {
 tr:nth-child(even) .comments {
   background-color: #dddddd;
 }
-
+.navbar.navbar-default
+{
+	margin:0px;
+}
 .sidebar
 {
 	position: absolute;
