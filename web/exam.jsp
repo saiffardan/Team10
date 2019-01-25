@@ -76,7 +76,7 @@
                 }
             %>
         </table>
-        
+        <div class = uploadtable>
         <h4>File Upload:</h4>
         Select a file to upload: <br />
         <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
@@ -85,7 +85,10 @@
            <br />
            <input type = "submit" value = "Upload File" />
         </form>
+		
+		</div>
         
+		<div class = commenttable>
         <table class="comments">
             <tr>
                 <th>Username</th>
@@ -123,5 +126,6 @@
             <input type="submit">
         </form>
         <button type="button" onclick="window.location = window.location.href">Reload</button>
+		</div>
     </body>
 </html>

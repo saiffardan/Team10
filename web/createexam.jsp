@@ -3,7 +3,7 @@
     Created on : 23-Jan-2019, 12:38:37
     Author     : danchoatanasov
 --%>
-
+<!Peter - this allows a java file to read html code >
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -61,11 +61,14 @@
                     </select>
                     </div>
                     <div class= "upload">
-                    <button type="button" class="btn btn-primary">Upload</button>
+                    <button type="button" class="btn btn-lg btn-primary">Upload</button>
+					<button class="btn btn-lg btn-primary" type="submit">Create</button>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+                    
+                    
+                    
             </form>
-	
+	  <br>
 
         <div class = "historybox">
         <br>

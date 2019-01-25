@@ -50,14 +50,16 @@
                     <%
                         File[] files = new File(getServletContext().getRealPath("/").substring(0,2) + "/exams").listFiles();
                         int x = 0;
-                        int size = files.length;
                         String defaultName = "progBar";
                         String name;
+                        
                         for(File file: files){
                             x++;
                             name = defaultName.concat(Integer.toString(x));
                             if(file.isDirectory()){
                                 out.println("<li> <a href = \"exam.jsp?folder=" + file.getName() + "\"> " + file.getName() + " </a> </li>");
+                                        // Saif - Create a progress bar for each exam paper, and give each a unique name eg. progBar1, progBar2 etc... 
+                                        // - Allows for dynamic generation of progress bars depending on how many exam papers there are
 					%>
                                         <div class="progress" style="height: 18px;">
                                         <div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
@@ -67,6 +69,7 @@
                             
                           
                         }
+                            // Saif - make n be == to the value of x so that we can use n in the <script> below
                             out.print("<script> var n; n =");
                             out.print(x + "</script>");
                     %>
@@ -87,50 +90,23 @@
 		
 		<script>
                     function testFunction() {
-                       var i;
-                for (i = 1; i <= n; i++) {
-                // window.alert("progBar" + i);           
-						if(document.getElementById("progBar" + i).style.width === "0%"){
-                             document.getElementById("progBar" + i).style.width = "25%";
-                        }else if(document.getElementById("progBar" + i).style.width === "25%") {
-                           document.getElementById("progBar" + i).style.width = "50%"; 
-						   }else if(document.getElementById("progBar" + i).style.width === "50%") {
-                           document.getElementById("progBar" + i).style.width = "75%"; 
-						   }else if(document.getElementById("progBar" + i).style.width === "75%") {
-                           document.getElementById("progBar" + i).style.width = "100%"; 
-						   }else if(document.getElementById("progBar" + i).style.width === "100%") {
-                           document.getElementById("progBar" + i).style.width = "0%"; 
-						}
-                        
-//                        if(document.getElementById("progBar1").style.width == "0%"){
-//                             document.getElementById("progBar1").style.width = "25%";
-//                             document.getElementById("progBar2").style.width = "25%";
-//                             document.getElementById("progBar3").style.width = "25%";
-//                             document.getElementById("progBar4").style.width = "25%";
-//                         } else if(document.getElementById("progBar1").style.width == "25%") {
-//                             document.getElementById("progBar1").style.width = "50%";
-//                             document.getElementById("progBar2").style.width = "50%";
-//                             document.getElementById("progBar3").style.width = "50%";
-//                             document.getElementById("progBar4").style.width = "50%";
-//                         } else if(document.getElementById("progBar1").style.width == "50%") {
-//                             document.getElementById("progBar1").style.width = "75%";
-//                             document.getElementById("progBar2").style.width = "75%";
-//                             document.getElementById("progBar3").style.width = "75%";
-//                             document.getElementById("progBar4").style.width = "75%";
-//                         } else if(document.getElementById("progBar1").style.width == "75%") {
-//                             document.getElementById("progBar1").style.width = "100%";
-//                             document.getElementById("progBar2").style.width = "100%";
-//                             document.getElementById("progBar3").style.width = "100%";
-//                             document.getElementById("progBar4").style.width = "100%";
-//                         } else if(document.getElementById("progBar1").style.width == "100%") {
-//                             document.getElementById("progBar1").style.width = "0%";
-//                             document.getElementById("progBar2").style.width = "0%";
-//                             document.getElementById("progBar3").style.width = "0%";
-//                             document.getElementById("progBar4").style.width = "0%";
-//                         }
+                        var i;
+                        // Saif - This is a temporary functionality which shows how progress bars will look like
+                        // - A dynamic solution to change more than one progress bar at once
+                        for (i = 1; i <= n; i++) {          
+                            if(document.getElementById("progBar" + i).style.width === "0%"){
+                                document.getElementById("progBar" + i).style.width = "25%";
+                            }else if(document.getElementById("progBar" + i).style.width === "25%") {
+                                document.getElementById("progBar" + i).style.width = "50%"; 
+                            }else if(document.getElementById("progBar" + i).style.width === "50%") {
+                                document.getElementById("progBar" + i).style.width = "75%"; 
+                            }else if(document.getElementById("progBar" + i).style.width === "75%") {
+                                document.getElementById("progBar" + i).style.width = "100%"; 
+                            }else if(document.getElementById("progBar" + i).style.width === "100%") {
+                                document.getElementById("progBar" + i).style.width = "0%"; 
+                            }
+                        }
                     }
-					}
 		</script>
-		
     </body>
 </html>

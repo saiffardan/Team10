@@ -1,3 +1,4 @@
+
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -11,6 +12,7 @@
 <html>
 	<head>
 		<title>Create new account</title>
+
 		
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -70,19 +72,14 @@
 			String role = request.getParameter("role");
 			
 			// File creation
-			String strPath = "V:/exams/accounts.txt";
+			String strPath = "Z:/web/accounts.txt";
                         FileWriter fw = new FileWriter(strPath, true);
                         BufferedWriter bw = new BufferedWriter(fw);
-			//File strFile = new File(strPath);
-			//boolean fileCreated = strFile.createNewFile();
+                        
 			// File appending
                         bw.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
                         bw.newLine();
                         bw.close();
-			//Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
-			//objWriter.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
-			//objWriter.flush();
-			//objWriter.close();
 		%>
 	</body>
 </html>

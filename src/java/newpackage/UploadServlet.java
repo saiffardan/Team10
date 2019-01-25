@@ -100,9 +100,9 @@ public class UploadServlet extends HttpServlet {
                      
                      file = new File(filePath) ;
                   } else {
-                      out.println(request.getHeader("referer") + "?");
+                      out.println(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + request.getHeader("referer").split("=")[1] + "-Draft.txt");
                      //file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-                     file = new File("X:/exams/somename.txt") ;
+                     file = new File(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt") ;
                   }
                   fi.write( file ) ;
                   out.println("Uploaded Filename: " + fileName + "<br>");

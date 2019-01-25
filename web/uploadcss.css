@@ -17,10 +17,26 @@ div.userpass
 	border:1px solid #a5a5a5;
 	background-color:#9ca6ff;
 }
-
+.commenttable
+{
+	position:absolute;
+	left: 35%;
+	width: 60%;
+	
+	
+}	
 div.loginerror
 {
 
+}
+
+.uploadtable
+{
+	position:absolute;
+	width: 20%;
+	top: 30%;
+	border: 1px solid #a5a5a5;
+	
 }
 .uploadbox
 {
@@ -45,9 +61,6 @@ div.loginerror
 
 .upload
 {
-	top: 1%;
-	left: -1%;
-	Position: relative;
 	text-align:center;
 }
 
