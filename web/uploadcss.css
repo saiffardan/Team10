@@ -77,31 +77,22 @@ div.loginerror
 	background-color:#edebe9;
 	text-align:center;
 	opacity:0.9;
+	list-style-type: circle;
 }
 .exambox
 {
 	position: absolute;
-	left: 25%;
+	left: 33%;
 	width: 33%;
 	height: auto;
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
 	text-align:center;
 	opacity:0.9;
+	list-style-type: circle;
 
 }
-.examboxsecond
-{
-	position: absolute;
-	left: 60%;
-	width: 33%;
-	height: auto;
-	border:1px solid #a5a5a5;
-	background-color:#edebe9;
-	text-align:center;
-	opacity:0.9;
 
-}
 
 .upload
 {
@@ -111,14 +102,15 @@ div.loginerror
 .historybox
 {
 	position: absolute;
-	top: 67%;
+	top: 80%;
 	left: 33%;
 	width: 33%;
-	height: 33%;
+	height: auto;
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
 	text-align:center;
 	opacity:0.9;
+	list-style-type: circle;
 
 }
 
@@ -154,9 +146,9 @@ tr:nth-child(even) .comments {
 	left: 0%;
 	width: auto;
 	padding: 5px;
-	height: auto;
+	height: 95%;
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
     list-style-type: circle;
 	opacity:0.95;
-}
+	}

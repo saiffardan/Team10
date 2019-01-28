@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author danchoatanasov
  */
+//@WebServlet(name = "PostComment", urlPatterns = {"/PostComment"})
+
+//@WebServlet(name = "PostComment", urlPatterns = {"X:/build/web/WEB-INF/classes/newpackage/PostComment"})
 @WebServlet(name = "PostComment", urlPatterns = {"/PostComment"})
 public class PostComment extends HttpServlet {
 

@@ -48,9 +48,21 @@
 		</div>
 	
 		<div class = "exambox">
-				<h1> Open Exams: </h1>
+                    <h1> Open Exams: </h1>
+                    
+                    
+                    
                     <%
-                        String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams";
+                        String path = "";
+                        if(getServletContext().getRealPath("/").lastIndexOf("\\build\\web") > 0)
+                        {
+                            path  = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams";
+                        }
+                        else
+                        {
+                            path = getServletContext().getRealPath("/") + "/exams";
+                        }
+                        //String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams";
                         File[] files = new File(path).listFiles();
                         int x = 0;
                         String defaultName = "progBar";
@@ -80,9 +92,7 @@
 			<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
 			<a onclick="testFunction()"> <button type="button" class="btn btn-default navbar-btn">Click me</button></a>
 		</div>
-		<div class = "examboxsecond">
-		
-		</div>
+
 
 		<div class = "historybox">
 			<h1> Admin tools </h1>

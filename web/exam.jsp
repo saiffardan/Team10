@@ -57,8 +57,20 @@
             <%
                 String folder = request.getParameter("folder").toString();
                 String[] titles = {"Module Code", "Module Title", "Author", "Academic Year", "Semester",  "Online or Paper", "Main or Resit", "Undergraduate or Postgraduate", "Progress"};
-                String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt";
-                BufferedReader br1 = new BufferedReader(new FileReader(path));
+                String path = "";
+                if(getServletContext().getRealPath("/").lastIndexOf("\\build\\web") > 0)
+                {
+                    path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0];
+                }
+                else
+                {
+                    path = getServletContext().getRealPath("/") + "/exams/" + folder + "/" + folder.split("_")[0];
+                }
+                String pathInfo = path + "-Info.txt";
+                String pathDraft = path + "-Draft.txt";
+                String pathComments = path + "-Comments.txt";
+                //String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt";
+                BufferedReader br1 = new BufferedReader(new FileReader(pathInfo));
                 try {
                     String data;
                     int counter = 0;
@@ -82,7 +94,7 @@
             Select a file to upload: <br />
             <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
                <input type = "file" name = "file" size = "50" />
-               <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Draft.txt"%>">
+               <input type="hidden" name="folderpath" value="<%= pathDraft%>">
                <br />
                <input type = "submit" value = "Upload File" />
             </form>  
@@ -95,7 +107,7 @@
                     <th>Comment</th>
                 </tr>        
                     <%
-                        BufferedReader br = new BufferedReader(new FileReader(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"));
+                        BufferedReader br = new BufferedReader(new FileReader(pathComments));
                         try {
                             String data;
                                 while((data= br.readLine())!= null)
@@ -120,7 +132,7 @@
                 <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
                 <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
                 <input type="hidden" name="modulecode" value="<%= folder%>">
-                <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"%>">
+                <input type="hidden" name="folderpath" value="<%= pathComments%>">
                 <br>
                 <input type="submit">
             </form>

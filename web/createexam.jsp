@@ -3,6 +3,7 @@
     Created on : 23-Jan-2019, 12:38:37
     Author     : danchoatanasov
 --%>
+<%@page import="java.util.Date"%>
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Statement"%>
@@ -36,52 +37,56 @@
          
             // if(request.getParameter("comment") != null){
         if(request.getParameter("submit")!= null){
-            try{
-                
+    try{
+                /* try{*/     
         String modulecode = request.getParameter("modulecode");   
         String moduletitle = request.getParameter("moduletitle"); 
         String author = request.getParameter("author"); 
         String year = request.getParameter("year");  
         String semester = request.getParameter("semester");
-        String online = request.getParameter("online");
-        String main = request.getParameter("main");
-        
+        String platform = request.getParameter("platform");
+        String examtype = request.getParameter("examtype");
+        String level = request.getParameter("level");
+        String id = "3";
+        String status = "";
+        Date d1 = new Date();
         
         
         Class.forName("com.mysql.jdbc.Driver").newInstance();   
        String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
        Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
        Statement st = conn.createStatement();
-       st.executeUpdate("insert into accounts(email,username,password,role)values('"+email+"','"+username+"','"+password+"','"+role+"')");
+                 st.executeUpdate("insert into exams(exid, modulecode, moduletitle, author, year, semester, platform, examtype, level, date, status)"
+               + "values('"+id+"', '"+modulecode+"','"+moduletitle+"','"+author+"','"+year+"','"+semester+"','"+platform+"','"+examtype+"','"+level+"', '"+d1+"', '"+status+"')");
        out.println("Succcessful");
        
-       
-        
-            
-            }catch(Exception e){
+          
+    }catch(Exception e){
             out.println(e);
             }
             
             
         }
         
-        
+        // <form class="form-signup" action="CreateNewExam" method="post">
+        //<input type="text" id="inputAuthor" name="author" value="<%= session.getAttribute("username")">
         %>
         
         <div class=container>
-            <form class="form-signup" action="CreateNewExam" method="post">
+            <form class="form-signup" action="createexam.jsp" method="post">
                     <h1 class="h3 mb-3 font-weight-normal">Create New Exam</h1>
+                    
                     <label for="inputModuleCode" class="sr-only">Module Code</label>
                     
                     <input type="text" id="inputModuleCode" name="modulecode" class="form-control" placeholder="Module Code" required autofocus>
                     
                     <label for="inputModuleTitle" class="sr-only">Module Title</label>
                     
-                    <input type="text" id="inputModuleTitle" name="moduletitle" class="form-control" placeholder="Module Title" required>
+                    <input type="text" id="inputModuleTitle" name="moduletitle" class="form-control" placeholder="Module Title" required autofocus>
                     
                     <label for="inputAuthor" class="sr-only">Author</label>
                     
-                    <input type="text" id="inputAuthor" name="author" value="<%= session.getAttribute("username")%>">
+                   <input type="text" id="inputAuthor" name="author" class="form-control" placeholder="Author" required autofocus>
                     
                     <label for="inputYear" class="sr-only">Academic Year</label>
                     
@@ -96,17 +101,17 @@
                             <option>Second</option>
                     </select>
                     <label for="inputOnline" class="sr-only">Online or Paper</label>
-                    <select id="inputOnline" name="online" class="form-control" placeholder="Online or Paper" required>
+                    <select id="inputOnline" name="platform" class="form-control" placeholder="Online or Paper" required>
                             <option value="" disabled selected>Online or Paper</option>
                             <option>Online</option>
                             <option>Paper</option>
                     </select>
-                    <select id="inputMain" name="main" class="form-control" placeholder="Main or Resit" required>
+                    <select id="inputMain" name="examtype" class="form-control" placeholder="Main or Resit" required>
                             <option value="" disabled selected>Main or Resit</option>
                             <option>Main</option>
                             <option>Resit</option>
                     </select>
-                    <select id="inputUndergrad" name="undergrad" class="form-control" placeholder="Undergraduate or Postgraduate" required>
+                    <select id="inputUndergrad" name="level" class="form-control" placeholder="Undergraduate or Postgraduate" required>
                             <option value="" disabled selected>Undergraduate or Postgraduate</option>
                             <option>Undergraduate</option>
                             <option>Postgraduate</option>
@@ -137,3 +142,4 @@
         </div>
     </body>
 </html>
+ 
