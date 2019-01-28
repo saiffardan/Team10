@@ -50,7 +50,8 @@
 		<div class = "exambox">
 				<h1> Open Exams: </h1>
                     <%
-                        //out.println("<p>" + getServletContext().getRealPath("/").split() + "</p>");
+                        String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web"));
+                        out.println("<p>" + path + "/exams" + "</p>");
                         File[] files = new File(getServletContext().getRealPath("/").substring(0,2) + "/exams").listFiles();
                         int x = 0;
                         String defaultName = "progBar";
