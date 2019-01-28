@@ -60,7 +60,7 @@ public class UploadServlet extends HttpServlet {
             factory.setSizeThreshold(maxMemSize);
 
             // Location to save data that is larger than maxMemSize.
-            factory.setRepository(new File("X:"));
+            factory.setRepository(new File(getServletContext().getRealPath("/").substring(0,2)));
 
             // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -96,16 +96,13 @@ public class UploadServlet extends HttpServlet {
                   
                   // Write the file
                   if( fileName.lastIndexOf("\\") >= 0 ) {
-                     //file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\"))) ;
-                     
-                     file = new File(filePath) ;
+                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
                   } else {
-                      out.println(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + request.getHeader("referer").split("=")[1] + "-Draft.txt");
-                     //file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-                     file = new File(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt") ;
+                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
                   }
-                  fi.write( file ) ;
-                  out.println("Uploaded Filename: " + fileName + "<br>");
+                  fi.write( file );
+                  response.sendRedirect(request.getHeader("referer"));
+                  //out.println("Uploaded Filename: " + fileName + "<br>");
                }
             }
             out.println("</body>");

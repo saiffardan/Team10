@@ -81,7 +81,7 @@
                     
                     <label for="inputAuthor" class="sr-only">Author</label>
                     
-                    <input type="text" id="inputAuthor" name="author" class="form-control" placeholder="Author" required>
+                    <input type="text" id="inputAuthor" name="author" value="<%= session.getAttribute("username")%>">
                     
                     <label for="inputYear" class="sr-only">Academic Year</label>
                     

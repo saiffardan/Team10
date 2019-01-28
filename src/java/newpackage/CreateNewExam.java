@@ -38,8 +38,7 @@ public class CreateNewExam extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             if(request.getParameter("modulecode") != null){
-                String drive = getServletContext().getRealPath("/").substring(0,2);
-                
+                //String drive = getServletContext().getRealPath("/").substring(0,2);
                 String moduleCode = request.getParameter("modulecode");
                 String moduleTitle = request.getParameter("moduletitle");
                 String author = request.getParameter("author");
@@ -51,8 +50,10 @@ public class CreateNewExam extends HttpServlet {
                 //File creation
                 //String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/newcomment.txt";
                 //String strPath = "/exams/newcomment.txt";
-                new File(drive + "/exams/" + moduleCode + "_" + year).mkdirs();
-                String strPath = drive + "/exams/" + moduleCode + "_" + year + "/" + moduleCode + "-Info.txt";
+                String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + moduleCode + "_" + year;
+                
+                new File(path).mkdirs();
+                String strPath = path + "/" + moduleCode + "-Info.txt";
                 File strFile = new File(strPath);
                 boolean fileCreated = strFile.isFile();
                 strFile.createNewFile();

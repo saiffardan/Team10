@@ -68,7 +68,8 @@ div.loginerror
 }
 .uploadbox
 {
-	position: relative;
+	position:absolute;
+	bottom:34%;
 	left: 33%;
 	width: 33%;
 	height: 33%;
@@ -79,10 +80,22 @@ div.loginerror
 }
 .exambox
 {
-	position: relative;
-	left: 33%;
+	position: absolute;
+	left: 25%;
 	width: 33%;
-	height: 33%;
+	height: auto;
+	border:1px solid #a5a5a5;
+	background-color:#edebe9;
+	text-align:center;
+	opacity:0.9;
+
+}
+.examboxsecond
+{
+	position: absolute;
+	left: 60%;
+	width: 33%;
+	height: auto;
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
 	text-align:center;
@@ -97,8 +110,8 @@ div.loginerror
 
 .historybox
 {
-	position: relative;
-	top: 50%;
+	position: absolute;
+	top: 67%;
 	left: 33%;
 	width: 33%;
 	height: 33%;
@@ -138,9 +151,9 @@ tr:nth-child(even) .comments {
 .sidebar
 {
 	position: absolute;
-	left: 1%;
+	left: 0%;
 	width: auto;
-	padding: 2px;
+	padding: 5px;
 	height: auto;
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;

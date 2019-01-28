@@ -57,7 +57,8 @@
             <%
                 String folder = request.getParameter("folder").toString();
                 String[] titles = {"Module Code", "Module Title", "Author", "Academic Year", "Semester",  "Online or Paper", "Main or Resit", "Undergraduate or Postgraduate", "Progress"};
-                BufferedReader br1 = new BufferedReader(new FileReader(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt"));
+                String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt";
+                BufferedReader br1 = new BufferedReader(new FileReader(path));
                 try {
                     String data;
                     int counter = 0;
@@ -77,55 +78,53 @@
             %>
         </table>
         <div class = uploadtable>
-        <h4>File Upload:</h4>
-        Select a file to upload: <br />
-        <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
-           <input type = "file" name = "file" size = "50" />
-           <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Draft.txt"%>">
-           <br />
-           <input type = "submit" value = "Upload File" />
-        </form>
-		
-		</div>
-        
-		<div class = commenttable>
-        <table class="comments">
-            <tr>
-                <th>Username</th>
-                <th>Comment</th>
-            </tr>
-        
-        <%
-            BufferedReader br = new BufferedReader(new FileReader(getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"));
-            try {
-                String data;
-                    while((data= br.readLine())!= null)
-                    {
-                        out.println("<tr>");
-                        String[] parts = data.split(":", 2);
-                        for(int i = 0; i < parts.length; i++)
-                        {
-                            out.println("<td>" + parts[i] + "</td>");
+            <h4>File Upload:</h4>
+            Select a file to upload: <br />
+            <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
+               <input type = "file" name = "file" size = "50" />
+               <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Draft.txt"%>">
+               <br />
+               <input type = "submit" value = "Upload File" />
+            </form>  
+        </div>
+               
+        <div class = commenttable>
+            <table class="comments">
+                <tr>
+                    <th>Username</th>
+                    <th>Comment</th>
+                </tr>        
+                    <%
+                        BufferedReader br = new BufferedReader(new FileReader(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"));
+                        try {
+                            String data;
+                                while((data= br.readLine())!= null)
+                                {
+                                    out.println("<tr>");
+                                    String[] parts = data.split(":", 2);
+                                    for(int i = 0; i < parts.length; i++)
+                                    {
+                                        out.println("<td>" + parts[i] + "</td>");
+                                    }
+                                    out.println("</tr>");
+                                }
+                        }catch(Exception e){
+                        e.printStackTrace();
+                        } finally {
+                            br.close();
                         }
-                        out.println("</tr>");
-                    }
-            }catch(Exception e){
-            e.printStackTrace();
-            } finally {
-                br.close();
-            }
-        %>
-        
-        </table>
-        <form action="PostComment" method="POST">
-            <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
-            <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
-            <input type="hidden" name="modulecode" value="<%= folder%>">
-            <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0,2) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"%>">
-            <br>
-            <input type="submit">
-        </form>
-        <button type="button" onclick="window.location = window.location.href">Reload</button>
-		</div>
+                    %>
+            </table>
+            
+            <form action="PostComment" method="POST">
+                <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
+                <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
+                <input type="hidden" name="modulecode" value="<%= folder%>">
+                <input type="hidden" name="folderpath" value="<%= getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Comments.txt"%>">
+                <br>
+                <input type="submit">
+            </form>
+            <button type="button" onclick="window.location = window.location.href">Reload</button>
+        </div>
     </body>
 </html>

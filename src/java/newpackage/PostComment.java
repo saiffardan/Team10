@@ -42,9 +42,6 @@ public class PostComment extends HttpServlet {
                 String username = request.getParameter("username");
                 String strPath = request.getParameter("folderpath");
                 //File creation
-                //String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/newcomment.txt";
-                //String strPath = "/exams/newcomment.txt";
-                //String strPath = getServletContext().getRealPath("/").substring(0,2) + "/exams/newcomment.txt";
                 File strFile = new File(strPath);
                 boolean fileCreated = strFile.isFile();
                 strFile.createNewFile();
