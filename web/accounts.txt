@@ -1,9 +1,1 @@
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
-USERNAME: null, PASSWORD: null, EMAIL: null, ROLE: null
+USERNAME: joe, PASSWORD: 123, EMAIL: joe@gmail.com, ROLE: Teaching Staff

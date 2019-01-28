@@ -27,7 +27,7 @@
 	
 	
     <body>
-			<div class = "loginbg">
+			<div class = "dashbg">
 		</div>
 		<div class = "sidebar">
 			<h1> Account settings </h1>
@@ -50,6 +50,7 @@
 		<div class = "exambox">
 				<h1> Open Exams: </h1>
                     <%
+                        //out.println("<p>" + getServletContext().getRealPath("/").split() + "</p>");
                         File[] files = new File(getServletContext().getRealPath("/").substring(0,2) + "/exams").listFiles();
                         int x = 0;
                         String defaultName = "progBar";

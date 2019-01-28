@@ -16,6 +16,18 @@ head
   filter: brightness(50%);
   
 }
+.dashbg
+{
+
+  position:fixed;
+  background-image: url("3d.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width:100%;
+  height:100%;
+
+  
+}
   div.userpass
 {
 	
@@ -51,6 +63,7 @@ div.loginerror
 	width: 20%;
 	top: 30%;
 	border: 1px solid #a5a5a5;
+	opacity:0.96;
 	
 }
 .uploadbox
@@ -62,6 +75,7 @@ div.loginerror
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
 	text-align:center;
+	opacity:0.9;
 }
 .exambox
 {
@@ -72,6 +86,8 @@ div.loginerror
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
 	text-align:center;
+	opacity:0.9;
+
 }
 
 .upload
@@ -89,6 +105,7 @@ div.loginerror
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
 	text-align:center;
+	opacity:0.9;
 
 }
 
@@ -97,6 +114,7 @@ div.loginerror
 {
 	position: relative;
 	left:15%;
+
 }
 table.comments {
   font-family: arial, sans-serif;
@@ -127,4 +145,5 @@ tr:nth-child(even) .comments {
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
     list-style-type: circle;
+	opacity:0.95;
 }

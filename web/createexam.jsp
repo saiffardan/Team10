@@ -3,6 +3,12 @@
     Created on : 23-Jan-2019, 12:38:37
     Author     : danchoatanasov
 --%>
+<%@page import="com.mysql.jdbc.Driver"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.Connection"%>
 <!Peter - this allows a java file to read html code >
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,19 +32,65 @@
         </nav>
     </head>
     <body>
+        <%
+         
+            // if(request.getParameter("comment") != null){
+        if(request.getParameter("submit")!= null){
+            try{
+                
+        String modulecode = request.getParameter("modulecode");   
+        String moduletitle = request.getParameter("moduletitle"); 
+        String author = request.getParameter("author"); 
+        String year = request.getParameter("year");  
+        String semester = request.getParameter("semester");
+        String online = request.getParameter("online");
+        String main = request.getParameter("main");
+        
+        
+        
+        Class.forName("com.mysql.jdbc.Driver").newInstance();   
+       String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
+       Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
+       Statement st = conn.createStatement();
+       st.executeUpdate("insert into accounts(email,username,password,role)values('"+email+"','"+username+"','"+password+"','"+role+"')");
+       out.println("Succcessful");
+       
+       
+        
+            
+            }catch(Exception e){
+            out.println(e);
+            }
+            
+            
+        }
+        
+        
+        %>
+        
         <div class=container>
             <form class="form-signup" action="CreateNewExam" method="post">
                     <h1 class="h3 mb-3 font-weight-normal">Create New Exam</h1>
                     <label for="inputModuleCode" class="sr-only">Module Code</label>
+                    
                     <input type="text" id="inputModuleCode" name="modulecode" class="form-control" placeholder="Module Code" required autofocus>
+                    
                     <label for="inputModuleTitle" class="sr-only">Module Title</label>
+                    
                     <input type="text" id="inputModuleTitle" name="moduletitle" class="form-control" placeholder="Module Title" required>
+                    
                     <label for="inputAuthor" class="sr-only">Author</label>
+                    
                     <input type="text" id="inputAuthor" name="author" class="form-control" placeholder="Author" required>
+                    
                     <label for="inputYear" class="sr-only">Academic Year</label>
+                    
                     <input type="text" id="inputYear" name="year" class="form-control" placeholder="Academic Year" required>
+                    
                     <label for="inputSemester" class="sr-only">Semester</label>
+                    
                     <select id="inputSemester" name="semester" class="form-control" placeholder="Semester" required>
+                        
                             <option value="" disabled selected>Semester</option>
                             <option>First</option>
                             <option>Second</option>
@@ -62,7 +114,7 @@
                     </div>
                     <div class= "upload">
                     <button type="button" class="btn btn-lg btn-primary">Upload</button>
-					<button class="btn btn-lg btn-primary" type="submit">Create</button>
+					<button class="btn btn-lg btn-primary" type="submit" name="submit">Create</button>
                     </div>
                     
                     
