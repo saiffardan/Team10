@@ -38,7 +38,6 @@
             <web-module-additional-libraries>
                 <library dirs="200">
                     <file>${file.reference.ExamProject-exams}</file>
-                    <path-in-war>/exams/</path-in-war>
                 </library>
             </web-module-additional-libraries>
             <source-roots>

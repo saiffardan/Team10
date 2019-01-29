@@ -36,7 +36,8 @@ public class UploadServlet extends HttpServlet {
     
     public void init( ){
       // Get the file location where it would be stored.
-      filePath = getServletContext().getInitParameter("file-upload");
+      //filePath = getServletContext().getInitParameter("file-upload");
+      //filePath = getServletContext().getInitParameter("folderpath");
       //out.println(filePath);
    }
 
@@ -76,7 +77,7 @@ public class UploadServlet extends HttpServlet {
 
             // Process the uploaded file items
             Iterator i = fileItems.iterator();
-
+            
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet upload</title>");  
@@ -92,8 +93,7 @@ public class UploadServlet extends HttpServlet {
                   String contentType = fi.getContentType();
                   boolean isInMemory = fi.isInMemory();
                   long sizeInBytes = fi.getSize();
-
-                  
+                 
                   // Write the file
 //                  if( getServletContext().getRealPath("/").lastIndexOf("\\build\\web") > 0) {
 //                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
@@ -101,11 +101,17 @@ public class UploadServlet extends HttpServlet {
 //                  } else {
 //                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
 //                  }
-                  String destination = getServletContext().getRealPath("/") + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt";
-                  file = new File(destination);
+                  //String destination = getServletContext().getRealPath("/") + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt";
+                  file = new File(filePath);
                   fi.write( file );
                   response.sendRedirect(request.getHeader("referer"));
                   //out.println("Uploaded Filename: " + fileName + "<br>");
+                  //out.println("Dest: " + destination + "<br>");
+                  //out.println("filePath: " + filePath + "<br>");
+               }
+               else //Case where we are getting a form field that is not a file
+               {
+                   filePath = fi.getString();
                }
             }
             out.println("</body>");

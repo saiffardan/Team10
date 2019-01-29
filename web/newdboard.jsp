@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.Driver"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -36,7 +37,10 @@
 		<div class = "sidebar">
 			<h1> Account settings </h1>
 			<br>
-			<li> Current account:  cramsay@dundee.ac.uk  </li>
+			<li> Current account: 
+                            <% String mail=(String)session.getAttribute("username");
+                            out.println(mail);%>
+                              </li>
 			<br>
 			<li> Not you? <a href = ""> Switch Account </a>  </li>
 			<br>
@@ -77,7 +81,7 @@
                  x++;
                  name = defaultName.concat(Integer.toString(x));   
                  out.println("<li> <a href = 'exam.jsp?folder='>");
-       out.println( rs.getString(2)  + "<br>");
+       out.println( rs.getString(2)  + " - " + rs.getString(3) + "<br>");
         out.println(" </a> </li>");
                 %>
                  
