@@ -1,3 +1,8 @@
+<%@page import="com.mysql.jdbc.Driver"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@ page import = "java.io.*,java.util.*" %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +37,10 @@
 		<div class = "sidebar">
 			<h1> Account settings </h1>
 			<br>
-			<li> Current account:  cramsay@dundee.ac.uk  </li>
+			<li> Current account: 
+                            <% String mail=(String)session.getAttribute("username");
+                            out.println(mail);%>
+                              </li>
 			<br>
 			<li> Not you? <a href = ""> Switch Account </a>  </li>
 			<br>
@@ -53,41 +61,49 @@
                     
                     
                     <%
-                        String path = "";
-                        if(getServletContext().getRealPath("/").lastIndexOf("\\build\\web") > 0)
-                        {
-                            path  = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams";
-                        }
-                        else
-                        {
-                            path = getServletContext().getRealPath("/") + "/exams";
-                        }
-                        //String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams";
-                        File[] files = new File(path).listFiles();
-                        int x = 0;
-                        String defaultName = "progBar";
-                        String name;
-                        
-                        for(File file: files){
-                            x++;
-                            name = defaultName.concat(Integer.toString(x));
-                            if(file.isDirectory()){
-                                out.println("<li> <a href = \"exam.jsp?folder=" + file.getName() + "\"> " + file.getName() + " </a> </li>");
-                                        // Saif - Create a progress bar for each exam paper, and give each a unique name eg. progBar1, progBar2 etc... 
-                                        // - Allows for dynamic generation of progress bars depending on how many exam papers there are
-					%>
-                                        <div class="progress" style="height: 18px;">
-                                        <div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
-                                        </div>
-					<%			
-                            }
-                            
-                          
-                        }
-                            // Saif - make n be == to the value of x so that we can use n in the <script> below
-                            out.print("<script> var n; n =");
-                            out.print(x + "</script>");
+                                        
+                    
+                     try{
+                /* try{*/     
+     
+        Date d1 = new Date();
+        
+        
+        Class.forName("com.mysql.jdbc.Driver").newInstance();   
+       String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
+       Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
+       Statement st = conn.createStatement();
+               ResultSet rs =  st.executeQuery("SELECT * FROM exams");
+               int x = 0;
+               String defaultName = "progBar";
+               String name;  
+                 while(rs.next()){
+                 x++;
+                 name = defaultName.concat(Integer.toString(x));   
+                 out.println("<li> <a href = 'exam.jsp?folder='>");
+       out.println( rs.getString(2)  + " - " + rs.getString(3) + "<br>");
+        out.println(" </a> </li>");
+                %>
+                 
+<div class="progress" style="height: 18px;">
+<div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
+</div>
+                 
+                <% }
+
+ out.print("<script> var n; n =");
+ out.print(x + "</script>");
+          
+    }catch(Exception e){
+            out.println(e);
+            }
+
                     %>
+                                        
+                                        
+           
+                    
+                
 			
 			<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
 			<a onclick="testFunction()"> <button type="button" class="btn btn-default navbar-btn">Click me</button></a>
