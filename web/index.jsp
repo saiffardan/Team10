@@ -28,6 +28,10 @@
         }
 		%>
 		</div>
+                
+                
+                
+                
 	<h1>Welcome! Please log in</h1>
     <form action="login.jsp">
         <label for="username">Username</label>

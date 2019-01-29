@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.Driver"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -77,7 +78,7 @@
                  x++;
                  name = defaultName.concat(Integer.toString(x));   
                  out.println("<li> <a href = 'exam.jsp?folder='>");
-       out.println( rs.getString(2)  + "<br>");
+       out.println( rs.getString(2)  + " - " + rs.getString(3) + "<br>");
         out.println(" </a> </li>");
                 %>
                  
