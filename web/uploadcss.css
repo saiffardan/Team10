@@ -151,4 +151,7 @@ tr:nth-child(even) .comments {
 	background-color:#edebe9;
     list-style-type: circle;
 	opacity:0.95;
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 	}

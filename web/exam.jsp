@@ -69,6 +69,7 @@
                 String pathInfo = path + "-Info.txt";
                 String pathDraft = path + "-Draft.txt";
                 String pathComments = path + "-Comments.txt";
+                String pathSolutions = path + "-Solutions.txt";
                 //String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt";
                 BufferedReader br1 = new BufferedReader(new FileReader(pathInfo));
                 try {
@@ -90,12 +91,23 @@
             %>
         </table>
         <div class = uploadtable>
-            <h4>File Upload:</h4>
+            <h4>Upload Draft:</h4>
             Select a file to upload: <br />
             <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
-               <input type = "file" name = "file" size = "50" />
                <input type="hidden" name="folderpath" value="<%= pathDraft%>">
+               <input type = "file" name = "file" size = "50" />
                <br />
+               <input type = "submit" value = "Upload File" />
+            </form>  
+               
+        </div>
+               <div class = uploadtable>
+            <h4>Upload Solutions:</h4>
+            Select a file to upload: <br />
+            <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
+               <input type="hidden" name="folderpath" value="<%= pathSolutions%>">
+               <input type = "file" name = "file" size = "50" />
+               <br>
                <input type = "submit" value = "Upload File" />
             </form>  
         </div>
