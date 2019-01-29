@@ -95,11 +95,14 @@ public class UploadServlet extends HttpServlet {
 
                   
                   // Write the file
-                  if( fileName.lastIndexOf("\\") >= 0 ) {
-                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
-                  } else {
-                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
-                  }
+//                  if( getServletContext().getRealPath("/").lastIndexOf("\\build\\web") > 0) {
+//                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
+//                     file = new File(getServletContext().getRealPath("/"));
+//                  } else {
+//                     file = new File(getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt");
+//                  }
+                  String destination = getServletContext().getRealPath("/") + "/exams/" + request.getHeader("referer").split("=")[1] + "/" + request.getHeader("referer").split("=")[1].split("_")[0] + "-Draft.txt";
+                  file = new File(destination);
                   fi.write( file );
                   response.sendRedirect(request.getHeader("referer"));
                   //out.println("Uploaded Filename: " + fileName + "<br>");
