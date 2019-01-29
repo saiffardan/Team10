@@ -112,6 +112,11 @@
             </form>  
         </div>
                
+               <div>
+                    <button>Send For Internal Moderation</button>
+               </div>
+              
+               
         <div class = commenttable>
             <table class="comments">
                 <tr>

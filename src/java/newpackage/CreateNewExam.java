@@ -50,13 +50,16 @@ public class CreateNewExam extends HttpServlet {
                 //File creation
                 //String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/newcomment.txt";
                 //String strPath = "/exams/newcomment.txt";
-                String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + moduleCode + "_" + year;
+                String path = getServletContext().getRealPath("/") + "/exams/" + moduleCode + "_" + year;
                 
                 new File(path).mkdirs();
                 String strPath = path + "/" + moduleCode + "-Info.txt";
+                String commentPath = path + "/" + moduleCode + "-Comments.txt";
                 File strFile = new File(strPath);
+                File commentFile = new File(commentPath);
                 boolean fileCreated = strFile.isFile();
                 strFile.createNewFile();
+                commentFile.createNewFile();
                 //File appending
                 Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
                 objWriter.write(moduleCode + "\r\n");
