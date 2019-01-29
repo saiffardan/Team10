@@ -47,6 +47,7 @@ head
 .commenttable
 {
 	position:absolute;
+	top:6%;
 	left: 35%;
 	width: 60%;
 	
@@ -64,7 +65,19 @@ div.loginerror
 	top: 30%;
 	border: 1px solid #a5a5a5;
 	opacity:0.96;
+	margin:10px;
+	background-color:#d1e2f2;
 	
+}
+.drafttable
+{
+	position:absolute;
+	width: 20%;
+	top: 45%;
+	border: 1px solid #a5a5a5;
+	opacity:0.96;
+	margin:10px;
+	background-color:#d1e2f2;
 }
 .uploadbox
 {
@@ -151,7 +164,15 @@ tr:nth-child(even) .comments {
 	background-color:#edebe9;
     list-style-type: circle;
 	opacity:0.95;
-	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 5px 10px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 10px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 3px 10px 5px 0px rgba(0,0,0,0.75);
+	}
+	
+.other
+	{
+		border:1px solid #a5a5a5;
+		margin:10px;
+		background-color:#edebe9;
+		width:20%;
 	}

@@ -101,7 +101,7 @@
             </form>  
                
         </div>
-               <div class = uploadtable>
+               <div class = drafttable>
             <h4>Upload Solutions:</h4>
             Select a file to upload: <br />
             <form action = "UploadServlet" method = "post" enctype = "multipart/form-data">
