@@ -1,4 +1,8 @@
-
+<%@page import="com.mysql.jdbc.Driver"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -33,7 +37,29 @@
 	</head>
 	
 	<body>
-		<form method="post">
+             <%
+                  if(request.getParameter("email")!= null){
+                      
+        String email = request.getParameter("email");   
+        String username = request.getParameter("username"); 
+        String password = request.getParameter("password"); 
+        String role = request.getParameter("role"); 
+           
+       try{
+       Class.forName("com.mysql.jdbc.Driver").newInstance();   
+       String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
+       Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
+       Statement st = conn.createStatement();
+       st.executeUpdate("insert into accounts(email,username,password,role)values('"+email+"','"+username+"','"+password+"','"+role+"')");
+       out.println("Succcessful");
+       }catch(Exception e){
+       
+       out.println(e);
+       }
+       
+                  }
+       %>
+                <form method="post" action="createAccount.jsp">
 			<table border="5" cellpadding="5" cellspacing="5">
 				<tr>
 					<td>Enter username: </td>
@@ -66,20 +92,20 @@
 		</form>
 		<%
 			// Read parameters in form and store in strings
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			String email = request.getParameter("email");
-			String role = request.getParameter("role");
+			//String username = request.getParameter("username");
+			//String password = request.getParameter("password");
+			//String email = request.getParameter("email");
+			//String role = request.getParameter("role");
 			
 			// File creation
-			String strPath = "Z:/web/accounts.txt";
-                        FileWriter fw = new FileWriter(strPath, true);
-                        BufferedWriter bw = new BufferedWriter(fw);
+			//String strPath = "Z:/web/accounts.txt";
+                        //FileWriter fw = new FileWriter(strPath, true);
+                        //BufferedWriter bw = new BufferedWriter(fw);
                         
 			// File appending
-                        bw.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
-                        bw.newLine();
-                        bw.close();
+                        //bw.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
+                        //bw.newLine();
+                        //bw.close();
 		%>
 	</body>
 </html>
