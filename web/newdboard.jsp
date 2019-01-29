@@ -37,7 +37,10 @@
 		<div class = "sidebar">
 			<h1> Account settings </h1>
 			<br>
-			<li> Current account:  cramsay@dundee.ac.uk  </li>
+			<li> Current account: 
+                            <% String mail=(String)session.getAttribute("username");
+                            out.println(mail);%>
+                              </li>
 			<br>
 			<li> Not you? <a href = ""> Switch Account </a>  </li>
 			<br>
