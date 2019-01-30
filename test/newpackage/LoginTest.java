@@ -66,8 +66,11 @@ public class LoginTest {
         //verify that username and password get called
         verify(request, atLeast(1)).getParameter("username");
         verify(request, atLeast(1)).getParameter("password");
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        System.out.println("Hello");
+        System.out.println(request.getContentLength());
+        //assertEquals(request.getSession().getAttribute("username"), "testSubject@dundee.ac.uk");
+        //assertEquals(request.getSession().getAttribute("password"), "pass");
     }
 
     /**
@@ -102,14 +105,18 @@ public class LoginTest {
      * Test of getServletInfo method, of class Login.
      */
     @Test
-    public void testGetServletInfo() {
-        System.out.println("getServletInfo");
+    public void testValidateUsername() {
+        System.out.println("Validate Username");
         Login instance = new Login();
-        String expResult = "";
-        String result = instance.getServletInfo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(instance.validateUsername("cramsay@dundee.ac.uk"));
+        assertTrue(instance.validateUsername("josh64@dundee.ac.uk"));
+        assertFalse(instance.validateUsername("cramsaydundee.ac.uk"));
+        assertFalse(instance.validateUsername("cramsay@dundee.ac"));
+        assertFalse(instance.validateUsername("cramsay@dundee.com"));
+        assertFalse(instance.validateUsername("sadsadasdsadssaddasdasdasdsadsasdadsaadawqadsfdasfewfasdfawefasdfasdmasmdsmamasmasdmadsmasdasdmadasdmsadsdaasdads@dundee.ac.uk"));
+        assertFalse(instance.validateUsername(""));
+        assertFalse(instance.validateUsername("jih#sa@school.com"));
+        assertFalse(instance.validateUsername("cramsay@edinburgh.co.uk"));
     }
     
 }
