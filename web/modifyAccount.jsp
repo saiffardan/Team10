@@ -19,7 +19,7 @@
 
 
     <head>
-        <title> Modify Accounts </title>
+        <title> Modify User Accounts </title>
         
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -38,10 +38,7 @@
 	</nav>
     </head>
     <body>
-        <%
-               
-                  
-                  
+        <%        
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
@@ -52,108 +49,90 @@
                 Statement st = conn.createStatement();
                
                 
- if(request.getParameter("Submit")!= null){
-    PreparedStatement ps = null;
+            if(request.getParameter("Submit")!= null){
+                PreparedStatement ps = null;
  
-    String id = request.getParameter("View");
-    String pass = request.getParameter("password");
-    String user = request.getParameter("username");
-    String mail = request.getParameter("email");
-//Integer id = Integer.parseInt(idd);
-      String qry = "Update accounts set username=?, password=?, email=? where id="+id;
-      ps = conn.prepareStatement(qry);
-     // ps.setString(1, id);
-      ps.setString(3, mail);
-      ps.setString(1, user);
-      ps.setString(2, pass);
-      int i = ps.executeUpdate();
-      if(i > 0){
-          out.println("WORKS!!");
-      }else {
-          out.println("NOT!!");
-      }
-      // execute the java preparedstatement
-     // preparedStmt.executeUpdate();
-     
-     
-}
-
-
-if(request.getParameter("View")!= null){
-  //Connection conn = DriverManager.getConnection(connName,username,password);
- String id = request.getParameter("View");
- Integer id1 = Integer.parseInt(id);
- //Statement stt = conn.createStatement();
-//String querys = ;
-ResultSet rss = st.executeQuery("SELECT * FROM accounts WHERE id='"+id1+"'");
-rss.next();    
-%>
-<h2>Modify User Record</h2>
-<table style="width:30%; " border="1" cellpadding="5" cellspacing="5">
-    <tr><td>UserName</td><td>Password</td><td>Email</td></tr>
-    <tr>
-        <td>&nbsp;<%= rss.getString("username") %>&nbsp;</td>
-        <td>&nbsp;<%= rss.getString("password") %>&nbsp;</td>
-        <td>&nbsp;<%= rss.getString("email") %>&nbsp;</td>
-    </tr>
-</table>
-    <form name="forms" action="modifyAccount.jsp" method="GET">
-<table>
-    <tr>
-        <td>Username</td>
-        <td><input type="text" name="username" value="" placeholder="Enter New Username" required="required"></td>
-    </tr>
-    <tr>
-        <td>Password</td>
-        <td><input type="text" name="password" value="" placeholder="Enter New Password" required="required"></td>
-    </tr>
-    <tr>
-        <td>Email</td>
-        <td><input type="text" name="email" value="" placeholder="Enter New Email" required="required"></td>
-    </tr>
-    <tr>
-        <td colspan="2"><input type="hidden" name="View" value="<%=id1%>"><input type="Submit" name="Submit" value="Modify"></td>
-    </tr>
-    
-    
-</table>
-
-</form>
-
-                      
-           <% //out.println("Working fine !!!");          
-                      
-                      
-                  }
-                       
-                  
-                %>
-                    <table id="table" border="5" cellpadding="5" cellspacing="5">
-                        <tr>
-                            <td>&nbsp;ID&nbsp;</td>
-                            <td>&nbsp;Username&nbsp;</td>
-                            <td>&nbsp;Email&nbsp;</td>
-                        </tr>                    
-                <%
-                     String query = "SELECT * FROM accounts";
-                      ResultSet rs = st.executeQuery(query);
-                Integer n=0;
-                while(rs.next()) {
-                    n++;
-                
-                    %>
-                        <tr>
-                            <td>&nbsp;<%= n %>&nbsp;</td>
-                            <td><a href="modifyAccount.jsp?View=<%=rs.getString("id")%>">&nbsp;<%= rs.getString("username") %></a>&nbsp;</td>
-                            <td>&nbsp;<%= rs.getString("email") %>&nbsp;</td>
-                            </br>
-                        </tr>
-                    <%
+                String id = request.getParameter("View");
+                String pass = request.getParameter("password");
+                String user = request.getParameter("username");
+                String mail = request.getParameter("email");
+                String qry = "Update users set username=?, password=?, email=? where userID="+id;
+                ps = conn.prepareStatement(qry);
+                ps.setString(3, mail);
+                ps.setString(1, user);
+                ps.setString(2, pass);
+                int i = ps.executeUpdate();
+                if(i > 0){
+                    out.println("WORKS!!");
+                }else {
+                    out.println("NOT!!");
                 }
-                %>
-                    
-                    </table>
-                <%
+            }
+
+            if(request.getParameter("View")!= null){
+                String id = request.getParameter("View");
+                Integer id1 = Integer.parseInt(id);
+                ResultSet rss = st.executeQuery("SELECT * FROM users WHERE userID='"+id1+"'");
+                rss.next();    
+        %>
+        <h2>Modify User Record</h2>
+        <table style="width:30%; " border="1" cellpadding="5" cellspacing="5">
+            <tr><td>UserName</td><td>Password</td><td>Email</td></tr>
+            <tr>
+            <td>&nbsp;<%= rss.getString("username") %>&nbsp;</td>
+            <td>&nbsp;<%= rss.getString("password") %>&nbsp;</td>
+            <td>&nbsp;<%= rss.getString("email") %>&nbsp;</td>
+            </tr>
+        </table>
+        <form name="forms" action="modifyAccount.jsp" method="GET">
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" name="username" value="" placeholder="Enter New Username" required="required"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="text" name="password" value="" placeholder="Enter New Password" required="required"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" value="" placeholder="Enter New Email" required="required"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="hidden" name="View" value="<%=id1%>"><input type="Submit" name="Submit" value="Modify"></td>
+                </tr>
+            </table>
+        </form>
+
+                      
+        <%        
+            }
+        %>
+        <table id="table" border="5" cellpadding="5" cellspacing="5">
+            <tr>
+                <td>&nbsp;ID&nbsp;</td>
+                <td>&nbsp;Username&nbsp;</td>
+                <td>&nbsp;Email&nbsp;</td>
+            </tr>                    
+        <%
+            String query = "SELECT * FROM users";
+            ResultSet rs = st.executeQuery(query);
+            Integer n = 0;
+            while(rs.next()) {
+                n++;
+                
+        %>
+                <tr>
+                    <td>&nbsp;<%= n %>&nbsp;</td>
+                    <td><a href="modifyAccount.jsp?View=<%=rs.getString("userID")%>">&nbsp;<%= rs.getString("username") %></a>&nbsp;</td>
+                    <td>&nbsp;<%= rs.getString("email") %>&nbsp;</td>
+                    </br>
+                </tr>
+        <%
+            }
+        %>     
+        </table>
+        <%
             } catch(Exception e) {
                 out.println(e);
             }
