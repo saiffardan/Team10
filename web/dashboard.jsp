@@ -60,7 +60,7 @@
                     
                     
                     
-                    <%
+                    <%--<%
                                         
                     
                      try{
@@ -73,31 +73,42 @@
        String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
        Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
        Statement st = conn.createStatement();
-               ResultSet rs =  st.executeQuery("SELECT * FROM exams");
-               int x = 0;
+               ResultSet rs =  st.executeQuery("SELECT * FROM exam");
+               //int x = 0;
                String defaultName = "progBar";
-               String name;  
+               //String name;  
                  while(rs.next()){
-                 x++;
-                 name = defaultName.concat(Integer.toString(x));   
+                 //x++;
+//                 name = defaultName.concat(Integer.toString(x));   
                  out.println("<li> <a href = 'exam.jsp?folder='>");
        out.println( rs.getString(2)  + " - " + rs.getString(3) + "<br>");
         out.println(" </a> </li>");
-                %>
+                %> --%>
+                
+        <%
+            int x = 0;
+            String name = "";
+            String defaultName = "progBar";
+            ArrayList exams = (ArrayList ) request.getAttribute("examsList");
+            if (exams != null)
+            {
+                for (Object exam : exams) {
+                    x++;
+                    name = defaultName.concat(Integer.toString(x));
+                    out.println("<li> <a href = 'exam.jsp?folder='>");
+                    out.println(exam.toString());
+                    out.println(" </a> </li>");
+                }
+            }
+                    %>
                  
 <div class="progress" style="height: 18px;">
 <div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
 </div>
                  
-                <% }
-
- out.print("<script> var n; n =");
- out.print(x + "</script>");
-          
-    }catch(Exception e){
-            out.println(e);
-            }
-
+        <% 
+            out.print("<script> var n; n =");
+            out.print(x + "</script>");
                     %>
                                         
                                         
