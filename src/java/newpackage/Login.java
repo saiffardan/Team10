@@ -46,7 +46,11 @@ public class Login extends HttpServlet {
             
             String redirectTo = "login.jsp";
             String username = request.getParameter("username");
+            //test username
             String passwordGuess = request.getParameter("password");
+            //test password
+            
+            
             String password = "";
             //request.setAttribute("passwordGuess", password);
             String query = "SELECT email, password FROM users WHERE email='"+username+"'";
@@ -69,7 +73,6 @@ public class Login extends HttpServlet {
                 
                 if(password.equals(passwordGuess))
                 {
-                    
                     session.setAttribute("username", username);
                     response.sendRedirect("Dashboard");
                 }
@@ -136,4 +139,32 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    protected boolean validateUsername (String username) {
+        boolean valid = false;
+        if (username.length() > 13 && username.length() < 100) {
+            valid = true;
+        } else {
+            return false;
+        }
+        if (username.contains("@")) {
+            valid = true;
+        } else {
+            return false;
+        }
+        if (username.contains("dundee.ac.uk")) {
+            valid = true;
+        } else {
+            return false;
+        }
+        if (username.contains("#")) {
+            return false;
+        }
+        if (username.isEmpty()) {
+            return false;
+        }
+        if (username.indexOf("@") > 1) {
+            return true;
+        }
+        return valid;
+    }
 }
