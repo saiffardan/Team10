@@ -10,8 +10,11 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,23 +63,24 @@ public class Dashboard extends HttpServlet {
                 }
                 request.setAttribute("examsList", exams);
                 //out.println(exams);
-                request.getRequestDispatcher(redirectTo).forward(request, response);
+                
                 
             } catch (Exception e) {
                 out.println(e);
             }
             finally{
-//                try {
-//                    rs.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                
-//                try {
-//                    conn.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
-//                }
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.getRequestDispatcher(redirectTo).forward(request, response);
                 }
         }
     }

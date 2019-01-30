@@ -95,7 +95,7 @@
                 for (Object exam : exams) {
                     x++;
                     name = defaultName.concat(Integer.toString(x));
-                    out.println("<li> <a href = 'exam.jsp?folder='>");
+                    out.println("<li> <a href = 'Exam?moduleCode=" + exam.toString().split(" - ")[0] + "' >");
                     out.println(exam.toString());
                     out.println(" </a> </li>");
                 }

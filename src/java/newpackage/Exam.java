@@ -5,12 +5,16 @@
  */
 package newpackage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,15 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * We refactored our code by moving java code to servlets
  *
  * @author danchoatanasov
  */
-//@WebServlet(name = "PostComment", urlPatterns = {"/PostComment"})
-
-//@WebServlet(name = "PostComment", urlPatterns = {"X:/build/web/WEB-INF/classes/newpackage/PostComment"})
-@WebServlet(name = "PostComment", urlPatterns = {"/PostComment"})
-public class PostComment extends HttpServlet {
+@WebServlet(name = "Exam", urlPatterns = {"/Exam"})
+public class Exam extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,22 +41,50 @@ public class PostComment extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            if(request.getParameter("comment") != null){
-                String username = request.getParameter("username");
-                String strPath = request.getParameter("folderpath");
-                //File creation
-                File strFile = new File(strPath);
-                boolean fileCreated = strFile.isFile();
-                strFile.createNewFile();
-                //File appending
-                Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
-                objWriter.write(username + ": ");
-                objWriter.write(request.getParameter("comment").toString() + "\r\n");
-                objWriter.flush();
-                objWriter.close();
-                //request.getRequestDispatcher("exam.jsp").forward(request, response);
-                response.sendRedirect(request.getHeader("referer"));
+            String redirectTo = "exam.jsp";
+            String moduleCode = (String)request.getParameter("moduleCode");
+            String query = "SELECT moduleCode, moduleTitle, author, year, semester, paperType, examType, level, status FROM exam WHERE moduleCode = '" + moduleCode + "'";
+            Connection conn = null;
+            Statement st = null;
+            ResultSet rs = null;
+            MyExam exam = null;
+            ArrayList list = new ArrayList();
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();   
+                String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
+                conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
+                st = conn.createStatement();
+                rs =  st.executeQuery(query);
+                while(rs.next())
+                {
+                    for (int i = 1; i < 10; i++) {
+                        list.add(rs.getString(i));
+                    }
+                    exam = new MyExam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                }
+                request.setAttribute("exam", exam);
+                request.setAttribute("list", list);
+                //out.println(exams);
+                
+                
+            } catch (Exception e) {
+                out.println(e);
             }
+            finally{
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.getRequestDispatcher(redirectTo).forward(request, response);
+                //out.println("kur");
+                }
         }
     }
 

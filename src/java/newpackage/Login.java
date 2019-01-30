@@ -11,8 +11,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -79,17 +82,17 @@ public class Login extends HttpServlet {
                 out.println(e);
             }
             finally{
-//                try {
-//                    rs.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                
-//                try {
-//                    conn.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
-//                }
+                try {
+                    rs.close();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
          }
     }

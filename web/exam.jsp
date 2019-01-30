@@ -3,6 +3,8 @@
     Created on : 23-Jan-2019, 13:22:20
     Author     : danchoatanasov
 --%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="newpackage.MyExam"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -55,39 +57,24 @@
     <body> 
         <table class="other">
             <%
-                String folder = request.getParameter("folder").toString();
                 String[] titles = {"Module Code", "Module Title", "Author", "Academic Year", "Semester",  "Online or Paper", "Main or Resit", "Undergraduate or Postgraduate", "Progress"};
                 String path = "";
-                if(getServletContext().getRealPath("/").lastIndexOf("\\build\\web") > 0)
-                {
-                    path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0];
+                ArrayList list = (ArrayList)request.getAttribute("list");
+                for (int i = 0; i < list.size(); i++) {
+                    out.println("<tr>");
+                    out.println("<td>" + titles[i] + "</td>");
+                    out.println("<td>" + list.get(i) + "</td>");
+                    out.println("</tr>");
                 }
-                else
-                {
-                    path = getServletContext().getRealPath("/") + "/exams/" + folder + "/" + folder.split("_")[0];
-                }
+                
+                path = getServletContext().getRealPath("/") + "/exams/" + list.get(0) + "_" + list.get(3) + "/" + list.get(0);
+                
                 String pathInfo = path + "-Info.txt";
                 String pathDraft = path + "-Draft.txt";
                 String pathComments = path + "-Comments.txt";
                 String pathSolutions = path + "-Solutions.txt";
-                //String path = getServletContext().getRealPath("/").substring(0, getServletContext().getRealPath("/").lastIndexOf("\\build\\web")) + "/exams/" + folder + "/" + folder.split("_")[0] + "-Info.txt";
-                BufferedReader br1 = new BufferedReader(new FileReader(pathInfo));
-                try {
-                    String data;
-                    int counter = 0;
-                        while((data= br1.readLine())!= null)
-                        {
-                            out.println("<tr>");
-                            out.println("<td>" + titles[counter] + "</td>");
-                            counter++;
-                            out.println("<td>" + data + "</td>");
-                            out.println("</tr>");
-                        }
-                }catch(Exception e){
-                e.printStackTrace();
-                } finally {
-                    br1.close();
-                }
+                
+                
             %>
         </table>
         <div class = uploadtable>
@@ -148,7 +135,6 @@
             <form action="PostComment" method="POST">
                 <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
                 <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
-                <input type="hidden" name="modulecode" value="<%= folder%>">
                 <input type="hidden" name="folderpath" value="<%= pathComments%>">
                 <br>
                 <input type="submit">
