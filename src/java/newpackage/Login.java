@@ -7,28 +7,25 @@ package newpackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author danchoatanasov
  */
-@WebServlet(name = "ExecuteQuery", urlPatterns = {"/ExecuteQuery"})
-public class ExecuteQuery extends HttpServlet {
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,51 +41,12 @@ public class ExecuteQuery extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String query = "";
-            String redirectTo = "";
-            boolean dontForward = false;
-            
-//            Enumeration<String> parameterNames = request.getParameterNames();
-// 
-//        while (parameterNames.hasMoreElements()) {
-// 
-//            String paramName = parameterNames.nextElement();
-//            out.println(paramName);
-//            out.println(", ");
-// 
-//            String[] paramValues = request.getParameterValues(paramName);
-//            for (int i = 0; i < paramValues.length; i++) {
-//                String paramValue = paramValues[i];
-//                out.println("t " + paramValue);
-//                out.println(", ");
-//            }
-// 
-//        }
-            
-            if(request.getParameter("login") != null)
-            {
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                request.setAttribute("passwordGuess", password);
-                query = "SELECT email, password FROM users WHERE email='"+username+"'";
-                redirectTo = "login.jsp";
-                //dontForward = true;
-                out.println("<p>how about here </p>");
-            }
-//            else
-//            {
-//                dontForward = true;
-//                out.println("<p>I seee </p>");
-//            }
-            else if(request.getParameter("loadDashboard") != null){
-                query = "SELECT * FROM exam";
-                redirectTo = "dashboard.jsp";
-                dontForward = true;
-                out.println("<p>we here? </p>");
-            }
-//            else if(){
-//                
-//            }
+            String redirectTo = "login.jsp";
+            String username = request.getParameter("username");
+            String passwordGuess = request.getParameter("password");
+            String password = "";
+            //request.setAttribute("passwordGuess", password);
+            String query = "SELECT email, password FROM users WHERE email='"+username+"'";
             
             Connection conn = null;
             Statement st = null;
@@ -99,24 +57,24 @@ public class ExecuteQuery extends HttpServlet {
                 conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
                 st = conn.createStatement();
                 rs =  st.executeQuery(query);
-                ResultSetMetaData rsmd = rs.getMetaData();
-                ArrayList result = new ArrayList();
-                while(rs.next()){
-                    String wholeRow = "";
-                    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                        wholeRow += rs.getString(i) + " ";
-                    }
-                    if(' ' == wholeRow.charAt(wholeRow.length() - 1))
-                    {
-                        wholeRow = wholeRow.substring(0, wholeRow.length() - 1);
-                    }
-                    result.add(wholeRow);
+                while(rs.next())
+                {
+                    password = rs.getString(2);
                 }
                 
-                request.setAttribute("queryResult", result);
+                HttpSession session = request.getSession();
                 
-                //request.getRequestDispatcher(redirectTo).forward(request, response);
-                
+                if(password.equals(passwordGuess))
+                {
+                    
+                    session.setAttribute("username", username);
+                    response.sendRedirect("Dashboard");
+                }
+                else
+                {
+                    session.setAttribute("loginError", "Invalid username or password, please try again.");
+                    response.sendRedirect("index.jsp");
+                }
             } catch (Exception e) {
                 out.println(e);
             }
@@ -132,15 +90,8 @@ public class ExecuteQuery extends HttpServlet {
 //                } catch (SQLException ex) {
 //                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-                
-                if(!dontForward)
-                {
-                    request.getRequestDispatcher(redirectTo).forward(request, response);
                 }
-                
-            }
-            
-        }
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

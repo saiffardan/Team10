@@ -33,14 +33,14 @@
                 
                 
 	<h1>Welcome! Please log in</h1>
-    <form action="login.jsp">
+    <form action="Login" method="post">
         <label for="username">Username</label>
         <input name="username" type="text">
 		<br>
         <label for="password">Password </label>
         <input name="password" type="password">
 		<br>
-        <input type="submit" type="button" class="btn btn-default navbar-btn"</button>
+        <input type="submit" type="button" name= "login" value="Login" class="btn btn-default navbar-btn"</button>
     </form>
 	</div>
 	

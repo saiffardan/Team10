@@ -17,7 +17,7 @@
         <%@ include file="parts/head.jsp" %>
     </head>
     <body>
-        <%
+        <%--<%
             
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -37,28 +37,46 @@
                 String user = rs.getString(3);
                  String pass = rs.getString(4);
                  String emails = rs.getString(2);
+                 
+                 %>--%>
+                 
+        <%
+            String email = "";
+            String password = "";
+            String passwordGuess = (String)request.getAttribute("passwordGuess");
+                        
+            ArrayList rows = new ArrayList();
+            rows = (ArrayList ) request.getAttribute("queryResult");
+            if(rows != null)
+            {
+                for (Object row : rows) {
+                    //out.println(row + "<br>");
+                    String rowParts[] = row.toString().split(" ");
+                    email = rowParts[0];
+                    password = rowParts[1];
+                }
+            }
+            
+            
                 
-                 if(username.equals(user) && password.equals(pass))
-                    {
-                //session.removeAttribure("loginError");
-                session.setAttribute("username", emails);
-                response.sendRedirect("dashboard.jsp");
+            if(password.equals(passwordGuess))
+            {
+               //session.removeAttribure("loginError");
+               session.setAttribute("username", email);
+               request.setAttribute("loadDashboard", "loadPlease");
+               request.removeAttribute("login");
+               request.getRequestDispatcher("ExecuteQuery").forward(request, response);
+               //response.sendRedirect("dashboard.jsp");
+               out.println("we in login.jsp, pass is alright");
+               
+       
+        
+               
             }
             else {
                 session.setAttribute("loginError", "Invalid username or password, please try again.");
                 response.sendRedirect("index.jsp");
             }
-               
-
-               
-           // rs.getString(2); 
-            
-            //insert Database logic to check if username and password exist.
-            
-            /*  if((username.equals( rs.getString(2)) && password.equals( rs.getString(2))) ||
-            username.equals("ddatanasov@dundee.ac.uk") && password.equals("123")) {*/
-            
-           
         %>
     </body>
 </html>
