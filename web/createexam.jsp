@@ -86,7 +86,7 @@
                     
                     <label for="inputAuthor" class="sr-only">Author</label>
                     
-                   <input type="text" id="inputAuthor" name="author" class="form-control" placeholder="Author" required autofocus>
+                   <input type="text" id="inputAuthor" name="author" value="<%= session.getAttribute("username")%>" class="form-control" >
                     
                     <label for="inputYear" class="sr-only">Academic Year</label>
                     

@@ -50,7 +50,7 @@
        String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
        Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
        Statement st = conn.createStatement();
-       st.executeUpdate("insert into accounts(email,username,password,role)values('"+email+"','"+username+"','"+password+"','"+role+"')");
+       st.executeUpdate("insert into users(email,username,password)values('"+email+"','"+username+"','"+password+"')");
        out.println("Succcessful");
        }catch(Exception e){
        
@@ -74,38 +74,10 @@
 					<td><input type="email" name="email" size="20" placeholder="Example@email.com..."/></td>
 				</tr>
 				<tr>
-					<td>Select role: </td>
-					<td><select name="role">
-						<option value="Teaching Staff">Teaching Staff</option>
-						<option value="Internal Moderator">Internal Moderator</option>
-						<option value="Exam Vetting Committee">Exam Vetting Committee</option>
-						<option value="External Examiner">External Examiner</option>
-						<option value="School Office">School Office</option>
-						<option value="Admin">Admin</option>
-					</select> </td>
-				</tr>
-				<tr>
 					<td><input type="submit" name="B1"/> 
 					<input type="reset" name="B2"/></td>
 				</tr>
 			</table>
 		</form>
-		<%
-			// Read parameters in form and store in strings
-			//String username = request.getParameter("username");
-			//String password = request.getParameter("password");
-			//String email = request.getParameter("email");
-			//String role = request.getParameter("role");
-			
-			// File creation
-			//String strPath = "Z:/web/accounts.txt";
-                        //FileWriter fw = new FileWriter(strPath, true);
-                        //BufferedWriter bw = new BufferedWriter(fw);
-                        
-			// File appending
-                        //bw.write("USERNAME: " + username + ", PASSWORD: " + password + ", EMAIL: " + email + ", ROLE: " + role);
-                        //bw.newLine();
-                        //bw.close();
-		%>
 	</body>
 </html>

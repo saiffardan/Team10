@@ -23,7 +23,7 @@
 		<br>
 		
 		<%
-			String path = "Z:/web/testingSomethinWillDeleteSaif.txt";
+			String path = "C:/Users/saiffardan/Documents/NetBeansProjects/Team10/web/testingSomethinWillDeleteSaif.txt";
                         InputStream ins = application.getResourceAsStream(path);
                         
                         try{

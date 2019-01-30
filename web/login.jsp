@@ -26,7 +26,7 @@
        String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
        Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
        Statement st = conn.createStatement();
-               ResultSet rs =  st.executeQuery("SELECT * FROM accounts WHERE username='"+username+"' && password='"+password+"'");
+               ResultSet rs =  st.executeQuery("SELECT * FROM users WHERE username='"+username+"' && password='"+password+"'");
                
                 //int rowCount = 0;
                 //while ( rs.next() )
