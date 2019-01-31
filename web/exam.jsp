@@ -178,6 +178,14 @@
                 <input type="submit">
             </form>
             <button type="button" onclick="window.location = window.location.href">Reload</button>
+            
+            <form action="PostSignature" method="SIGN">
+                <textarea name="signature" style="width:175px; height:25px;" placeholder="Please Enter Signature"></textarea>
+                <input type="hidden" name="folderpath" value="<%= pathComments%>">
+                <br>
+                <input type="submit">
+            </form>
+            
         </div>
     </body>
 </html>
