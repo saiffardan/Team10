@@ -45,15 +45,16 @@ public class Login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String redirectTo = "login.jsp";
-            String username = request.getParameter("username");
+            String email = request.getParameter("email");
             //test username
             String passwordGuess = request.getParameter("password");
             //test password
             
             
             String password = "";
+            String username = "";
             //request.setAttribute("passwordGuess", password);
-            String query = "SELECT email, password FROM users WHERE email='"+username+"'";
+            String query = "SELECT username, password FROM users WHERE email='"+email+"'";
             
             Connection conn = null;
             Statement st = null;
@@ -67,6 +68,7 @@ public class Login extends HttpServlet {
                 while(rs.next())
                 {
                     password = rs.getString(2);
+                    username = rs.getString(1);
                 }
                 
                 HttpSession session = request.getSession();
@@ -74,6 +76,7 @@ public class Login extends HttpServlet {
                 if(password.equals(passwordGuess))
                 {
                     session.setAttribute("username", username);
+                    session.setAttribute("email", email);
                     response.sendRedirect("Dashboard");
                 }
                 else

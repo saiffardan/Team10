@@ -44,12 +44,13 @@ public class Dashboard extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String redirectTo = "dashboard.jsp";
-            String query = "SELECT moduleTitle, moduleCode from exam";
+            String query = "SELECT * from exam";
             Connection conn = null;
             Statement st = null;
             ResultSet rs = null;
             ArrayList exams = new ArrayList();
             String examName = "";
+            
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();   
                 String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
@@ -58,8 +59,19 @@ public class Dashboard extends HttpServlet {
                 rs =  st.executeQuery(query);
                 while(rs.next())
                 {
-                    examName = rs.getString(2) + " - " + rs.getString(1);
-                    exams.add(examName);
+                    //int i = 1;
+                    //exam = new MyExam(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
+                    //examName = rs.getString(2) + " - " + rs.getString(1);
+                    String examFull = "";
+                    for(int i = 1; i <= 14; i++)
+                    {
+                        examFull += rs.getString(i);
+                        if(i != 14)
+                        {
+                            examFull +=  ",";
+                        }
+                    }
+                    exams.add(examFull);
                 }
                 request.setAttribute("examsList", exams);
                 //out.println(exams);

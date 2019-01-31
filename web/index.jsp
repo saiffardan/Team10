@@ -34,8 +34,8 @@
                 
 	<h1>Welcome! Please log in</h1>
     <form action="Login" method="post">
-        <label for="username">Username</label>
-        <input name="username" type="text">
+        <label for="email">Email </label>
+        <input name="email" type="text">
 		<br>
         <label for="password">Password </label>
         <input name="password" type="password">
