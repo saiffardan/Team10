@@ -57,6 +57,7 @@
     <body> 
         <table class="other">
             <%
+                String role = (String)request.getAttribute("role");
                 String[] titles = {"Module Code", "Module Title", "Author", "Academic Year", "Semester",  "Online or Paper", "Main or Resit", "Undergraduate or Postgraduate", "Progress"};
                 String path = "";
                 ArrayList list = (ArrayList)request.getAttribute("list");
@@ -66,6 +67,9 @@
                     out.println("<td>" + list.get(i) + "</td>");
                     out.println("</tr>");
                 }
+                
+                String progress = (String)list.get(list.size() - 1);
+                String moduleCode = (String)list.get(0);
                 
                 path = getServletContext().getRealPath("/") + "/exams/" + list.get(0) + "_" + list.get(3) + "/" + list.get(0);
                 
@@ -99,9 +103,42 @@
             </form>  
         </div>
                
-               <div>
-                    <button>Send For Internal Moderation</button>
-               </div>
+               
+        <div>
+            <form action="UpdateProgress" method="post">
+                
+                <input type="hidden" name="moduleCode" value="<%= moduleCode %>">
+            <%
+                if(progress.equals("New") && role.equals("exSet")){
+                    %>
+                    <input type="hidden" name="changeTo" value="Internal Moderation">
+                    <input type="submit" value="Send to Internal Moderator"/>
+                    <%
+                }
+                if(progress.equals("Internal Moderation") && role.equals("intMod"))
+                {
+                    %>
+                    <input type="hidden" name="changeTo" value="Exam Vetting">
+                    <input type="submit" value="Send to Exam Vetter"/>
+                    <%
+                }
+                if(progress.equals("Exam Vetting") && role.equals("exVet")){
+                %>
+                    <input type="hidden" name="changeTo" value="Exam Vetting">
+                    <input type="submit" value="Send to External Moderator"/>
+                    <%
+                }
+                if(progress.equals("External Moderation") && role.equals("exMod")){
+                %>
+                    <input type="hidden" name="changeTo" value="Completed">
+                    <input type="submit" value="Mark as Completed"/>
+                    <%
+                }
+                %>
+            </form>
+             
+        </div>
+                            
               
                
         <div class = commenttable>
@@ -135,6 +172,7 @@
             <form action="PostComment" method="POST">
                 <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
                 <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
+                <input type="hidden" name="role" value="<%= role%>">
                 <input type="hidden" name="folderpath" value="<%= pathComments%>">
                 <br>
                 <input type="submit">

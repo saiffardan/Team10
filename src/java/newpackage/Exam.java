@@ -43,6 +43,7 @@ public class Exam extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String redirectTo = "exam.jsp";
             String moduleCode = (String)request.getParameter("moduleCode");
+            String role = (String)request.getParameter("role");
             String query = "SELECT moduleCode, moduleTitle, author, year, semester, paperType, examType, level, status FROM exam WHERE moduleCode = '" + moduleCode + "'";
             Connection conn = null;
             Statement st = null;
@@ -66,6 +67,7 @@ public class Exam extends HttpServlet {
                 }
                 //request.setAttribute("exam", exam);
                 request.setAttribute("list", list);
+                request.setAttribute("role", role);
                 //out.println(exams);
                 
                 

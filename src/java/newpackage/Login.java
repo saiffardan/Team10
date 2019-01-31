@@ -77,12 +77,14 @@ public class Login extends HttpServlet {
                 {
                     session.setAttribute("username", username);
                     session.setAttribute("email", email);
-                    response.sendRedirect("Dashboard");
+                    redirectTo = "Dashboard";
+                    //response.sendRedirect("Dashboard");
                 }
                 else
                 {
                     session.setAttribute("loginError", "Invalid username or password, please try again.");
-                    response.sendRedirect("index.jsp");
+                    //response.sendRedirect("index.jsp");
+                    redirectTo = "index.jsp";
                 }
             } catch (Exception e) {
                 out.println(e);
@@ -99,6 +101,7 @@ public class Login extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                response.sendRedirect(redirectTo);
                 }
          }
     }
