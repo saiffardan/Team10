@@ -13,6 +13,8 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<link href="uploadcss.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!--               vvv This needs to be used in order to have animated and colored progress bars, but interferes with ^^^^
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
 
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
@@ -31,9 +33,8 @@
     </head>
 	
 	
-    <body>
-			<div class = "dashbg">
-		</div>
+    <body onload="testFunction()">
+		<div class = "dashbg"></div>
 		<div class = "sidebar">
 			<h1> Account settings </h1>
 			<br>
@@ -98,15 +99,14 @@
                     out.println("<li> <a href = 'Exam?moduleCode=" + exam.toString().split(" - ")[0] + "' >");
                     out.println(exam.toString());
                     out.println(" </a> </li>");
+                    %>
+                    <div class="progress" style="height: 18px;">
+                        <div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
+                    </div>
+                    <%
                 }
             }
-                    %>
-                 
-<div class="progress" style="height: 18px;">
-<div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
-</div>
-                 
-        <% 
+                             
             out.print("<script> var n; n =");
             out.print(x + "</script>");
                     %>
@@ -117,13 +117,13 @@
                 
 			
 			<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
-			<a onclick="testFunction()"> <button type="button" class="btn btn-default navbar-btn">Click me</button></a>
+			<!--<a onclick="testFunction()"> <button type="button" class="btn btn-default navbar-btn">Click me</button></a>-->
 		</div>
 
 
 		<div class = "historybox">
 			<h1> Admin tools </h1>
-			<li> <a href = "useraccount.jsp"> Account Oversee</li>
+			<li> <a href = "accountSetting.jsp"> Account Settings</li>
 			<br>
 			<li> <a href = "createAccount.jsp">  Create Account</li>
 			<br>
@@ -135,20 +135,39 @@
 		<script>
                     function testFunction() {
                         var i;
+                        var stage;
                         // Saif - This is a temporary functionality which shows how progress bars will look like
                         // - A dynamic solution to change more than one progress bar at once
-                        for (i = 1; i <= n; i++) {          
-                            if(document.getElementById("progBar" + i).style.width === "0%"){
+                        for (i = 1; i <= n; i++) { 
+                            stage = Math.floor((Math.random() * 4) + 1);
+                            if(stage === 1){
                                 document.getElementById("progBar" + i).style.width = "25%";
-                            }else if(document.getElementById("progBar" + i).style.width === "25%") {
-                                document.getElementById("progBar" + i).style.width = "50%"; 
-                            }else if(document.getElementById("progBar" + i).style.width === "50%") {
-                                document.getElementById("progBar" + i).style.width = "75%"; 
-                            }else if(document.getElementById("progBar" + i).style.width === "75%") {
-                                document.getElementById("progBar" + i).style.width = "100%"; 
-                            }else if(document.getElementById("progBar" + i).style.width === "100%") {
-                                document.getElementById("progBar" + i).style.width = "0%"; 
+                                document.getElementById("progBar" + i).innerHTML = "Stage 1";
+                                document.getElementById("progBar" + i).className = "progress-bar bg-danger progress-bar-striped progress-bar-animated";
+                            } else if (stage === 2) {
+                                document.getElementById("progBar" + i).style.width = "50%";
+                                document.getElementById("progBar" + i).innerHTML = "Stage 2";
+                                document.getElementById("progBar" + i).className = "progress-bar bg-warning progress-bar-striped progress-bar-animated";
+                            } else if (stage === 3) {
+                                document.getElementById("progBar" + i).style.width = "75%";
+                                document.getElementById("progBar" + i).innerHTML = "Stage 3";
+                                document.getElementById("progBar" + i).className = "progress-bar bg-info progress-bar-striped progress-bar-animated";
+                            } else if (stage === 4) {
+                                document.getElementById("progBar" + i).style.width = "100%";
+                                document.getElementById("progBar" + i).innerHTML = "Stage 4";
+                                document.getElementById("progBar" + i).className = "progress-bar bg-success progress-bar-striped progress-bar-animated";
                             }
+//                            if(document.getElementById("progBar" + i).style.width === "0%"){
+//                                document.getElementById("progBar" + i).style.width = "25%";
+//                            }else if(document.getElementById("progBar" + i).style.width === "25%") {
+//                                document.getElementById("progBar" + i).style.width = "50%"; 
+//                            }else if(document.getElementById("progBar" + i).style.width === "50%") {
+//                                document.getElementById("progBar" + i).style.width = "75%"; 
+//                            }else if(document.getElementById("progBar" + i).style.width === "75%") {
+//                                document.getElementById("progBar" + i).style.width = "100%"; 
+//                            }else if(document.getElementById("progBar" + i).style.width === "100%") {
+//                                document.getElementById("progBar" + i).style.width = "0%"; 
+//                            }
                         }
                     }
 		</script>
