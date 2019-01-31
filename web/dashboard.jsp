@@ -19,7 +19,7 @@
 	<nav class="navbar navbar-default">
             <div class="container-fluid">
             <div class="navbar-header">
-                <a href="dashboard.jsp">
+                <a href="Dashboard">
                     <img alt="Uni of Dundee crest" src="Dundeebadge.png" height="50" width="50"> 
                 </a>
             </div>
@@ -32,6 +32,7 @@
     </head>
     
     <body onload="testFunction()">
+       
         <div class = "dashbg"></div>
         
 	<div class = "sidebar">
@@ -86,6 +87,7 @@
         <%
             String username = (String)session.getAttribute("username");
             int x = 0;
+            String stage = "";
             String name = "";
             String defaultName = "progBar";
             ArrayList exams = (ArrayList ) request.getAttribute("examsList");
@@ -112,7 +114,6 @@
                             externalModIndex.add(examsConverted.size() - 1);
                         }
                 }
-                
                 for (int i = 0; i < internalModIndex.size(); i++) {
                         out.println("<p> Internal Mod: </p>");
                         x++;
@@ -121,7 +122,15 @@
                         out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(internalModIndex.get(i)).getModuleCode() + "' >");
                         out.println(examsConverted.get(internalModIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(internalModIndex.get(i)).getModuleTitle());
                         out.println(" </a> </li>");
+                        %>
+                            <div class="progress">
+                                <div id="<%=name%>" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%" ></div>
+                            </div>
+                        <%
+                       stage = examsConverted.get(internalModIndex.get(i)).getStatus();
                     }
+                    //x = 0;
+          out.print(" <div>");
                 for (int i = 0; i < examVetIndex.size(); i++) {
                         out.println("<p> Exam Vetting: </p>");
                         x++;
@@ -130,7 +139,15 @@
                         out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examVetIndex.get(i)).getModuleCode() + "' >");
                         out.println(examsConverted.get(examVetIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(examVetIndex.get(i)).getModuleTitle());
                         out.println(" </a> </li>");
+                        %>
+                            <div class="progress">
+                                <div id="<%=name%>" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%" ></div>
+                            </div>
+                        <%
+                       stage = examsConverted.get(internalModIndex.get(i)).getStatus();
                     }
+                       out.print(" <div>");
+          out.print(" <div>");
                 for (int i = 0; i < externalModIndex.size(); i++) {
                         out.println("<p> External Mod: </p>");
                         x++;
@@ -139,8 +156,15 @@
                         out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(externalModIndex.get(i)).getModuleCode() + "' >");
                         out.println(examsConverted.get(externalModIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(externalModIndex.get(i)).getModuleTitle());
                         out.println(" </a> </li>");
+                        %>
+                            <div class="progress">
+                                <div id="<%=name%>" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%" ></div>
+                            </div>
+                        <%
+                       stage = examsConverted.get(internalModIndex.get(i)).getStatus();
                     }
-                
+                 out.print(" <div>");
+          
 //                for(int i = 0; i < examsConverted.size(); i++)
 //                {
 //                    if(examsConverted.get(i).getIntMod().equals(session.getAttribute("username")))
@@ -166,10 +190,15 @@
                              
             out.print("<script> var n; n =");
             out.print(x + "</script>");
+
+  
+  
         %>
+        
+        
 	<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
 	</div>
-
+<!--
         <div class = "historybox">
             <h1> Admin tools </h1>
             <li> <a href = "accountSetting.jsp"> Account Settings</li>
@@ -179,30 +208,36 @@
             <li> <a href = "exam.jsp">Full Exam listing</li>
             <br>
         </div>
-		
+	-->	
         <script>
             function testFunction() {
                 var i;
-                var stage;
+                var stg = "<%= stage %>";
+                //var stage;
                 // Saif - This is a temporary functionality which shows how progress bars will look like
                 // - A dynamic solution to change more than one progress bar at once
                 for (i = 1; i <= n; i++) { 
-                    stage = Math.floor((Math.random() * 4) + 1);
-                    if(stage === 1){
-                        document.getElementById("progBar" + i).style.width = "25%";
-                        document.getElementById("progBar" + i).innerHTML = "Stage 1";
+                    //alert(stg);
+                    //stage = Math.floor((Math.random() * 4) + 1);
+                    if(stg === "New"){
+                        document.getElementById("progBar" + i).style.width = "20%";
+                        document.getElementById("progBar" + i).innerHTML = "New";
                         document.getElementById("progBar" + i).className = "progress-bar bg-danger progress-bar-striped progress-bar-animated";
-                    } else if (stage === 2) {
-                        document.getElementById("progBar" + i).style.width = "50%";
-                        document.getElementById("progBar" + i).innerHTML = "Stage 2";
+                    } else if (stg === "Internal Moderation") {
+                        document.getElementById("progBar" + i).style.width = "40%";
+                        document.getElementById("progBar" + i).innerHTML = "Internal Moderation";
                         document.getElementById("progBar" + i).className = "progress-bar bg-warning progress-bar-striped progress-bar-animated";
-                    } else if (stage === 3) {
-                        document.getElementById("progBar" + i).style.width = "75%";
-                        document.getElementById("progBar" + i).innerHTML = "Stage 3";
+                    } else if (stg === "External Vetting") {
+                        document.getElementById("progBar" + i).style.width = "60%";
+                        document.getElementById("progBar" + i).innerHTML = "External Vetting";
                         document.getElementById("progBar" + i).className = "progress-bar bg-info progress-bar-striped progress-bar-animated";
-                    } else if (stage === 4) {
+                    } else if (stg === "External Moderation") {
+                        document.getElementById("progBar" + i).style.width = "80%";
+                        document.getElementById("progBar" + i).innerHTML = "External Moderation";
+                        document.getElementById("progBar" + i).className = "progress-bar bg-success progress-bar-striped progress-bar-animated";
+                    } else if (stg === "Completed") {
                         document.getElementById("progBar" + i).style.width = "100%";
-                        document.getElementById("progBar" + i).innerHTML = "Stage 4";
+                        document.getElementById("progBar" + i).innerHTML = "Completed";
                         document.getElementById("progBar" + i).className = "progress-bar bg-success progress-bar-striped progress-bar-animated";
                     }
 //                            if(document.getElementById("progBar" + i).style.width === "0%"){
