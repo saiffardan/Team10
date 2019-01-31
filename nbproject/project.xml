@@ -37,7 +37,7 @@
             </web-module-libraries>
             <web-module-additional-libraries>
                 <library dirs="200">
-                    <file>${file.reference.ExamProject-exams}</file>
+                    <file>${file.reference.Team10-exams}</file>
                     <path-in-war>/exams/</path-in-war>
                 </library>
             </web-module-additional-libraries>
