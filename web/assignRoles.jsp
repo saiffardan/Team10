@@ -1,5 +1,5 @@
-<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -14,45 +14,15 @@
 <%@page import="java.io.BufferedWriter"%>
 <%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Create new account</title>
-
-		
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<link href="uploadcss.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-		
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a href="dashboard.jsp">
-						<img alt="Uni of Dundee crest" src="Dundeebadge.png" height="50" width="50"> 
-					</a>
-				</div>
-
-				<a href="logout.jsp"> <button type="button" class="btn btn-default navbar-btn"style="float:right">Logout</button>  </a>
-			</div>
-		</nav>
-	</head>
-	
-	<body>
              <%
-                 
-                      
-          
-        
            
        try{
            ///  connect and create statement
            
-       Class.forName("com.mysql.jdbc.Driver").newInstance();   
-       String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
-       Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
-       Statement st = conn.createStatement();
+       Class.forName("com.mysql.jdbc.Driver").newInstance();  
+           String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
+           Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
+           Statement st = conn.createStatement();
        
        
         if(request.getParameter("remove")!= null){ 
@@ -108,7 +78,13 @@
         ResultSet urs = st.executeQuery("SELECT Distinct u.email, u.username, r.role FROM users u, roles r WHERE r.userID=u.userID");
              %>
                <h3>Users Roles</h3>
-                     <table border="1" cellpadding="" cellspacing="5" width="20%">
+                     <table border="1" cellpadding="" cellspacing="5" style="width:30%;" >
+                           <tr>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            
+                        </tr>
                          <%while(urs.next()){%>
                         <tr>
                             <td><%=urs.getString("u.email")%></td>
@@ -132,12 +108,12 @@
         
                  %>
                  <h3>Assign Roles</h3>
-                <form method="post" action="assignRoles.jsp">
-			<table border="1" cellpadding="" cellspacing="5" width="20%">
+                <form method="post" action="accountSetting.jsp?assign">
+			<table border="1" cellpadding="" cellspacing="5" style="width:30%;" >
 				<tr>
 					
 					<td>
-                                            <select name="userID" style="width: 300pt; height: 20pt" required > 
+                                            <select name="userID" style="width: 100%; height: 20pt" required > 
                                                 <option value="" disabled selected>Select username</option>
                                                 <% 
                                                      ResultSet rss = st.executeQuery("SELECT * FROM users");
@@ -156,7 +132,7 @@
                                 <tr>
                                      
                     
-                                    <td><select name="role" style="width: 300pt;height: 20pt" required> 
+                                    <td><select name="role" style="width: 100%;height: 20pt" required> 
                                             <option value="" disabled selected>Select Role</option>
                                             
                                             <option>Teaching Staff</option>
@@ -193,11 +169,7 @@
        out.println(e);
        }
        
-                  
-                  
- 
+       
        %>
        
       
-	</body>
-</html>

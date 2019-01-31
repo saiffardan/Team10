@@ -148,12 +148,12 @@ public class Login extends HttpServlet {
             valid = true;
         } else {
             return false;
-        }
+}
         if (username.contains("@")) {
             valid = true;
         } else {
             return false;
-        }
+}
         if (username.contains("dundee.ac.uk")) {
             valid = true;
         } else {
