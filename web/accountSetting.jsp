@@ -27,7 +27,7 @@
         <nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a href="dashboard.jsp">
+					<a href="Dashboard">
 						<img alt="Uni of Dundee crest" src="Dundeebadge.png" height="50" width="50"> 
 					</a>
 				</div>

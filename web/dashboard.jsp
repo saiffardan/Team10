@@ -68,7 +68,7 @@
                     out.println(mail);%>
             </li>
             <br>
-            <li> Not you? <a href = ""> Switch Account </a>  </li>
+            <li> Not you? <a href = "logout.jsp"> Switch Account </a>  </li>
             <br>
             <li> <a href = ""> Change Password </a> </li>
             <br>
