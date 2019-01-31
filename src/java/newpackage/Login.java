@@ -46,7 +46,9 @@ public class Login extends HttpServlet {
             
             String redirectTo = "login.jsp";
             String username = request.getParameter("username");
-            //test username
+            if(!validateUsername(username)) {
+                username = "invalid";
+            }
             String passwordGuess = request.getParameter("password");
             //test password
             
@@ -139,7 +141,7 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    protected boolean validateUsername (String username) {
+    public boolean validateUsername (String username) {
         boolean valid = false;
         if (username.length() > 13 && username.length() < 100) {
             valid = true;
@@ -164,6 +166,22 @@ public class Login extends HttpServlet {
         }
         if (username.indexOf("@") > 1) {
             return true;
+        }
+        return valid;
+    }
+    public boolean validatePassword(String password) {
+        boolean valid = true;
+        if (password.isEmpty()) {
+            return false;
+        }
+        if (password.contains("#")) {
+            return false;
+        }
+        if (password.contains("@")) {
+            return false;
+        }
+        if (password.length() > 30) {
+            return false;
         }
         return valid;
     }
