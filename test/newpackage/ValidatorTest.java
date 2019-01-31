@@ -99,5 +99,31 @@ public class ValidatorTest {
         assertFalse(Validator.validatePassword("#sad"));
         assertFalse(Validator.validatePassword("123asdasdlkasdlkadsasdklasdklads12993021iasdklasdnasdklad"));
     }
-    
+    @Test
+    public void testValidateModuleCode() {
+        System.out.println("Validate module code");
+        assertTrue(Validator.validateModuleCode("AC31007"));
+        assertTrue(Validator.validateModuleCode("Ac31007"));
+        assertTrue(Validator.validateModuleCode("FZ41207"));
+        
+        assertFalse(Validator.validateModuleCode("AC333"));
+        assertFalse(Validator.validateModuleCode("Z333"));
+        assertFalse(Validator.validateModuleCode("BC3332"));
+        assertFalse(Validator.validateModuleCode("ACB333"));
+        assertFalse(Validator.validateModuleCode("AC3333"));  
+    }
+    @Test
+    public void testValidateModuleTitle() {
+        System.out.println("Validate module title");
+        assertTrue(Validator.validateModuleTitle("Agile Software Engineering"));
+        assertTrue(Validator.validateModuleTitle("Engineering 101"));
+    }
+    @Test
+    public void testValidateModuleAuthor() {
+        System.out.println("Validate module author");
+    }
+    @Test
+    public void testValidateModuleYear() {
+        System.out.println("validate module year");
+    }
 }
