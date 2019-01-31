@@ -118,12 +118,4 @@ public class ValidatorTest {
         assertTrue(Validator.validateModuleTitle("Agile Software Engineering"));
         assertTrue(Validator.validateModuleTitle("Engineering 101"));
     }
-    @Test
-    public void testValidateModuleAuthor() {
-        System.out.println("Validate module author");
-    }
-    @Test
-    public void testValidateModuleYear() {
-        System.out.println("validate module year");
-    }
 }

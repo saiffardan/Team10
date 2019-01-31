@@ -40,23 +40,21 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, IllegalArgumentException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             String redirectTo = "login.jsp";
-            String username = request.getParameter("username");
-            if(!Validator.validateUsername(username)) {
-                throw new IllegalArgumentException("Invalid Login Username!");
-            }
+            String email = request.getParameter("email");
+            //test username
             String passwordGuess = request.getParameter("password");
-            if (!Validator.validatePassword(passwordGuess)) {
-                throw new IllegalArgumentException("Invalid Login Password!");
-            }
+            //test password
+            
             
             String password = "";
+            String username = "";
             //request.setAttribute("passwordGuess", password);
-            String query = "SELECT email, password FROM users WHERE email='"+username+"'";
+            String query = "SELECT username, password FROM users WHERE email='"+email+"'";
             
             Connection conn = null;
             Statement st = null;
@@ -70,6 +68,7 @@ public class Login extends HttpServlet {
                 while(rs.next())
                 {
                     password = rs.getString(2);
+                    username = rs.getString(1);
                 }
                 
                 HttpSession session = request.getSession();
@@ -77,6 +76,7 @@ public class Login extends HttpServlet {
                 if(password.equals(passwordGuess))
                 {
                     session.setAttribute("username", username);
+                    session.setAttribute("email", email);
                     response.sendRedirect("Dashboard");
                 }
                 else
@@ -142,5 +142,32 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+    protected boolean validateUsername (String username) {
+        boolean valid = false;
+        if (username.length() > 13 && username.length() < 100) {
+            valid = true;
+        } else {
+            return false;
+}
+        if (username.contains("@")) {
+            valid = true;
+        } else {
+            return false;
+}
+        if (username.contains("dundee.ac.uk")) {
+            valid = true;
+        } else {
+            return false;
+        }
+        if (username.contains("#")) {
+            return false;
+        }
+        if (username.isEmpty()) {
+            return false;
+        }
+        if (username.indexOf("@") > 1) {
+            return true;
+        }
+        return valid;
+    }
 }

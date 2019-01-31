@@ -9,22 +9,28 @@ package newpackage;
  *
  * @author danchoatanasov
  */
-public class MyExam {
-    public String moduleTitle, moduleCode, author, semester, year, examType, level, paperType, date;
-    
-    MyExam(){
-        moduleTitle = null;
-        moduleCode= null;
-        author= null;
-        semester= null; 
-        year= null;
-        examType= null;
-        level= null;
-        paperType= null;
-        date = null;
-    }
+public class MyExam extends Object{
+    public String  examID, moduleTitle, moduleCode, author, semester, year, examType, level, paperType, date, intMod, exVet, exMod, status;
 
-    public MyExam(String moduleTitle, String moduleCode, String author, String semester, String year, String examType, String level, String paperType, String date) {
+     public MyExam() {
+        this.examID = null;
+        this.moduleTitle = null;
+        this.moduleCode = null;
+        this.author = null;
+        this.semester = null;
+        this.year = null;
+        this.examType = null;
+        this.level = null;
+        this.paperType = null;
+        this.date = null;
+        this.intMod = null;
+        this.exVet = null;
+        this.exMod = null;
+        this.status = null;
+    }
+    
+    public MyExam(String examID, String moduleTitle, String moduleCode, String author, String semester, String year, String examType, String level, String paperType, String date, String intMod, String exVet, String exMod, String status) {
+        this.examID = examID;
         this.moduleTitle = moduleTitle;
         this.moduleCode = moduleCode;
         this.author = author;
@@ -34,7 +40,15 @@ public class MyExam {
         this.level = level;
         this.paperType = paperType;
         this.date = date;
+        this.intMod = intMod;
+        this.exVet = exVet;
+        this.exMod = exMod;
+        this.status = status;
     }
+
+   
+    
+   
 
     public String getModuleTitle() {
         return moduleTitle;
@@ -62,6 +76,46 @@ public class MyExam {
 
     public String getSemester() {
         return semester;
+    }
+
+    public String getExamID() {
+        return examID;
+    }
+
+    public void setExamID(String examID) {
+        this.examID = examID;
+    }
+
+    public String getIntMod() {
+        return intMod;
+    }
+
+    public void setIntMod(String intMod) {
+        this.intMod = intMod;
+    }
+
+    public String getExVet() {
+        return exVet;
+    }
+
+    public void setExVet(String exVet) {
+        this.exVet = exVet;
+    }
+
+    public String getExMod() {
+        return exMod;
+    }
+
+    public void setExMod(String exMod) {
+        this.exMod = exMod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setSemester(String semester) {
@@ -102,6 +156,11 @@ public class MyExam {
 
     public String getDate() {
         return date;
+    }
+
+    @Override
+    public String toString() {
+        return "MyExam{" + "examID=" + examID + ", moduleTitle=" + moduleTitle + ", moduleCode=" + moduleCode + ", author=" + author + ", semester=" + semester + ", year=" + year + ", examType=" + examType + ", level=" + level + ", paperType=" + paperType + ", date=" + date + ", intMod=" + intMod + ", exVet=" + exVet + ", exMod=" + exMod + ", status=" + status + '}';
     }
 
     public void setDate(String date) {
