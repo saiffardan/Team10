@@ -5,7 +5,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
-
+<div class="accsetchoice">
  <h3>Modify User Record</h3>
  <%        
           try{
@@ -48,7 +48,7 @@
                 rss.next();    
         %>
        
-        <table style="width: 30%;" border="1" cellpadding="5" cellspacing="5">
+       <table class="table table-striped">
             <tr>
                 <th>UserName</th><th>Password</th><th>Email</th>
             </tr>
@@ -59,7 +59,7 @@
             </tr>
         </table>
         <form name="forms" action="accountSetting.jsp?modify" method="GET">
-            <table style="width:30%;" >
+            <table class="table table-striped">
                 <tr>
                     <td>Username</td>
                     <td><input type="text" name="username" value="" placeholder="Enter New Username" required="required"></td>
@@ -82,7 +82,7 @@
         <%        
             }
         %>
-        <table id="table" border="1" cellpadding="5" cellspacing="5" style="width:30%;" >
+        <table class="table table-striped">
             <tr>
                 <th>&nbsp;ID&nbsp;</th>
                 <th>&nbsp;Username&nbsp;</th>
@@ -106,6 +106,7 @@
             }
         %>     
         </table>
+		</div>
         <%
             } catch(Exception e) {
                 out.println(e);

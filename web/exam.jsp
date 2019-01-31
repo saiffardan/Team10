@@ -77,6 +77,7 @@
                 String pathDraft = path + "-Draft.txt";
                 String pathComments = path + "-Comments.txt";
                 String pathSolutions = path + "-Solutions.txt";
+                String pathSignature = path + "-Signatures.txt"; 
                 
                 
             %>
@@ -179,5 +180,23 @@
             </form>
             <button type="button" onclick="window.location = window.location.href">Reload</button>
         </div>
+                
+                <div class = signature>
+                    <table class ="signatures">
+                        <tr>
+                            <th>Signature</th>
+                        </tr>
+                    </table>
+                    
+                    <form action="PostComment" method="SIGN">
+                        <textarea name="comment" style="width:175px; height:25px;" placeholder="Sign here..."></textarea>
+                        <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
+                        <input type="hidden" name="folderpath" value="<%= pathComments%>">
+                        <br>
+                        <input type="submit">
+                    </form>
+                        <button type="button" onclick="window.location = window.location.href">Reload</button>
+                </div>
+                
     </body>
 </html>

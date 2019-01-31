@@ -52,7 +52,15 @@ head
 	width: 60%;
 	
 	
-}	
+}
+
+.signature
+{
+    	position:absolute;
+	top:60%;
+	width: 60%;
+        margin:10px;
+}
 div.loginerror
 {
 
@@ -159,7 +167,7 @@ tr:nth-child(even) .comments {
 	left: 0%;
 	width: auto;
 	padding: 5px;
-	height: 95%;
+	height: 85%;
 	border:1px solid #a5a5a5;
 	background-color:#edebe9;
     list-style-type: circle;

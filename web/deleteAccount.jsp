@@ -6,7 +6,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="com.mysql.jdbc.Driver"%>
 
-
+<div class = "accsetchoice">
         <h3>Delete User Accounts</h3>
         
         
@@ -42,7 +42,7 @@
                     rss.next();    
         %>
         <form action="accountSetting.jsp?delete" method="GET">
-            <table style="width:30%; " border="1" cellpadding="5" cellspacing="5">
+            <table class="table table-striped">
                 <tr>
                     <th>UserName</th><th>Password</th><th>Email</th>
                 </tr>
@@ -64,7 +64,7 @@
                 Integer n = 0;
                 ResultSet rs = st.executeQuery(query);
                 %>
-                    <table id="table" border="1" cellpadding="5" cellspacing="5" style="width:30%;" >
+                    <table class="table table-striped">
                         <tr>
                             <th>&nbsp;ID&nbsp;</th>
                             <th>&nbsp;Username&nbsp;</th>
@@ -78,7 +78,7 @@
                             <td>&nbsp;<%= n %>&nbsp;</td>
                             <td><a href="accountSetting.jsp?delete=&View=<%=rs.getString("userID")%>">&nbsp;<%= rs.getString("username") %></a>&nbsp;</td>
                             <td>&nbsp;<%= rs.getString("email") %>&nbsp;</td>
-                            <br>
+                            
                         </tr>
                     <%
                 }
@@ -89,3 +89,4 @@
                 out.println(e);
             }
         %>
+		</div>

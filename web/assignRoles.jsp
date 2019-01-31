@@ -77,8 +77,9 @@
         
         ResultSet urs = st.executeQuery("SELECT Distinct u.email, u.username, r.role FROM users u, roles r WHERE r.userID=u.userID");
              %>
+			 <div class ="accsetchoice">
                <h3>Users Roles</h3>
-                     <table border="1" cellpadding="" cellspacing="5" style="width:30%;" >
+                     <table class="table table-striped">
                            <tr>
                             <th>Email</th>
                             <th>Username</th>
@@ -109,12 +110,9 @@
                  %>
                  <h3>Assign Roles</h3>
                 <form method="post" action="accountSetting.jsp?assign">
-			<table border="1" cellpadding="" cellspacing="5" style="width:30%;" >
-				<tr>
-					
-					<td>
-                                            <select name="userID" style="width: 100%; height: 20pt" required > 
-                                                <option value="" disabled selected>Select username</option>
+
+											<select class="browser-default custom-select" style="width: 100%;height: 20pt" name="userID" required >
+											<option value="" disabled selected>Select username</option>
                                                 <% 
                                                      ResultSet rss = st.executeQuery("SELECT * FROM users");
                                                     while(rss.next()){ %>
@@ -125,14 +123,14 @@
 
                                                 <% } %>
                                             </select>
-                                        </td>
-				</tr>
+
+				
 				
                                 
-                                <tr>
+                                
                                      
                     
-                                    <td><select name="role" style="width: 100%;height: 20pt" required> 
+                                    <select name="role" style="width: 100%;height: 20pt" required> 
                                             <option value="" disabled selected>Select Role</option>
                                             
                                             <option>Teaching Staff</option>
@@ -144,19 +142,20 @@
                                             
                                            
                                         </select>
-                                    </td>
-                                </tr>
+                                   
                                 
-				<tr>
-                                    <td><input type="submit" name="submit" value="Assign Role"/> 
-                                        <input type="submit" name="remove" value="Remove Role"/> 
+                                
+									<button type="submit" name="submit" class="btn btn-primary" value="Assign Role">Assign Role</button>
+                                    <button type="submit" name="remove" class="btn btn-primary" value="Remove Role">Remove Role</button>
+									
+									
                                         <input type="hidden" name="userid" value=""/>
-                                    </td>
-				</tr>
-			</table>
+                                   
+				
+			
 		</form>
        
-      
+      </div>
                                         
        
        

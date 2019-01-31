@@ -2,7 +2,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.mysql.jdbc.Driver"%>
-
+<div class="accsetchoice">
 <h3>Create Account</h3>
              <%
                   if(request.getParameter("email")!= null){
@@ -27,23 +27,28 @@
        
                   }
        %>
+	   
                 <form method="post" action="accountSetting.jsp?create">
+			<div class="form-group">
 			<table border="1" cellpadding="5" cellspacing="5" style="width:30%;" >
-				<tr>
-					<td>Enter username: </td>
-					<td><input type="text" name="username" size="53" placeholder="ExampleUsername123..."/></td>
-				</tr>
-				<tr>
-					<td>Enter password: </td>
-					<td><input type="password" name="password" size="53" placeholder="ExamplePassword123..."/></td>
-				</tr>
-				<tr>
-					<td>Enter email: </td>
-					<td><input type="email" name="email" size="53" placeholder="Example@email.com..."/></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="B1"/> </td>
-                                        <td colspan="2"> <input type="reset" name="B2"/></td>
-				</tr>
-			</table>
+				
+					<label for="exampleInputEmail1">Username</label>
+					<input type="text" class="form-control"  " placeholder="ExampleUsername123...">
+
+					<label for="exampleInputEmail1">Password</label>
+				<input type="password" name="Password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+
+					<label for="exampleInputEmail1">Email</label>
+					<input type="email" class="form-control"placeholder="Example@email.com...">
+		
+
+				
+					<button type="submit" name="B1" class="btn btn-primary">Submit</button>
+					<!-- <input type="submit" name="B1" --> 
+                    <button type="reset" name="B2" class="btn btn-primary">Reset</button>
+				
+
 		</form>
+		</div>
+		</div>
