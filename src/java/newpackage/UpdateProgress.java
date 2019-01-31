@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,14 +20,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author danchoatanasov
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "UpdateProgress", urlPatterns = {"/UpdateProgress"})
+public class UpdateProgress extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,19 +41,10 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String redirectTo = "login.jsp";
-            String email = request.getParameter("email");
-            //test username
-            String passwordGuess = request.getParameter("password");
-            //test password
-            
-            
-            String password = "";
-            String username = "";
-            //request.setAttribute("passwordGuess", password);
-            String query = "SELECT username, password FROM users WHERE email='"+email+"'";
-            
+            String changeTo = (String)request.getParameter("changeTo");
+            String moduleCode = (String)request.getParameter("moduleCode");
+            String redirectTo = "Dashboard";
+            String query = "UPDATE exam set status='" + changeTo + "' where moduleCode='" + moduleCode + "'";
             Connection conn = null;
             Statement st = null;
             ResultSet rs = null;
@@ -64,46 +53,27 @@ public class Login extends HttpServlet {
                 String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
                 conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
                 st = conn.createStatement();
-                rs =  st.executeQuery(query);
-                while(rs.next())
-                {
-                    password = rs.getString(2);
-                    username = rs.getString(1);
-                }
+                st.executeUpdate(query);
                 
-                HttpSession session = request.getSession();
-                
-                if(password.equals(passwordGuess))
-                {
-                    session.setAttribute("username", username);
-                    session.setAttribute("email", email);
-                    redirectTo = "Dashboard";
-                    //response.sendRedirect("Dashboard");
-                }
-                else
-                {
-                    session.setAttribute("loginError", "Invalid username or password, please try again.");
-                    //response.sendRedirect("index.jsp");
-                    redirectTo = "index.jsp";
-                }
             } catch (Exception e) {
                 out.println(e);
             }
             finally{
                 try {
                     rs.close();
-                    
                 } catch (SQLException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect(redirectTo);
+                request.getRequestDispatcher(redirectTo).forward(request, response);
                 }
-         }
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -145,32 +115,4 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    protected boolean validateUsername (String username) {
-        boolean valid = false;
-        if (username.length() > 13 && username.length() < 100) {
-            valid = true;
-        } else {
-            return false;
-}
-        if (username.contains("@")) {
-            valid = true;
-        } else {
-            return false;
-}
-        if (username.contains("dundee.ac.uk")) {
-            valid = true;
-        } else {
-            return false;
-        }
-        if (username.contains("#")) {
-            return false;
-        }
-        if (username.isEmpty()) {
-            return false;
-        }
-        if (username.indexOf("@") > 1) {
-            return true;
-        }
-        return valid;
-    }
 }

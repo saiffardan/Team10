@@ -92,6 +92,7 @@
             ArrayList<Integer> internalModIndex = new ArrayList<Integer>();
             ArrayList<Integer> examVetIndex = new ArrayList<Integer>();
             ArrayList<Integer> externalModIndex = new ArrayList<Integer>();
+            ArrayList<Integer> examSetIndex = new ArrayList<Integer>();
             if (exams != null)
             {
                 for (Object exam : exams) {
@@ -110,14 +111,27 @@
                         {
                             externalModIndex.add(examsConverted.size() - 1);
                         }
+                        if(examsConverted.get(examsConverted.size() - 1).getAuthor().equals(username))
+                        {
+                            examSetIndex.add(examsConverted.size() - 1);
+                        }
                 }
                 
+                for (int i = 0; i < examSetIndex.size(); i++) {
+                        out.println("<p> Exam Setter: </p>");
+                        x++;
+                        //int index = 
+                        name = defaultName.concat(Integer.toString(x));
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examSetIndex.get(i)).getModuleCode() + "&role=exSet" +  "' >");
+                        out.println(examsConverted.get(examSetIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(examSetIndex.get(i)).getModuleTitle());
+                        out.println(" </a> </li>");
+                    }
                 for (int i = 0; i < internalModIndex.size(); i++) {
                         out.println("<p> Internal Mod: </p>");
                         x++;
                         //int index = 
                         name = defaultName.concat(Integer.toString(x));
-                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(internalModIndex.get(i)).getModuleCode() + "' >");
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(internalModIndex.get(i)).getModuleCode() + "&role=intMod" +  "' >");
                         out.println(examsConverted.get(internalModIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(internalModIndex.get(i)).getModuleTitle());
                         out.println(" </a> </li>");
                     }
@@ -126,7 +140,7 @@
                         x++;
                         //int index = 
                         name = defaultName.concat(Integer.toString(x));
-                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examVetIndex.get(i)).getModuleCode() + "' >");
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examVetIndex.get(i)).getModuleCode() + "&role=exVet" + "' >");
                         out.println(examsConverted.get(examVetIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(examVetIndex.get(i)).getModuleTitle());
                         out.println(" </a> </li>");
                     }
@@ -135,7 +149,7 @@
                         x++;
                         //int index = 
                         name = defaultName.concat(Integer.toString(x));
-                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(externalModIndex.get(i)).getModuleCode() + "' >");
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(externalModIndex.get(i)).getModuleCode() + "&role=exMod" + "' >");
                         out.println(examsConverted.get(externalModIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(externalModIndex.get(i)).getModuleTitle());
                         out.println(" </a> </li>");
                     }
