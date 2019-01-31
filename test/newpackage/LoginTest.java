@@ -74,34 +74,6 @@ public class LoginTest {
     }
 
     /**
-     * Test of doGet method, of class Login.
-     */
-    @Test
-    public void testDoGet() throws Exception {
-        System.out.println("doGet");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        Login instance = new Login();
-        instance.doGet(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of doPost method, of class Login.
-     */
-    @Test
-    public void testDoPost() throws Exception {
-        System.out.println("doPost");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        Login instance = new Login();
-        instance.doPost(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getServletInfo method, of class Login.
      */
     @Test
@@ -117,6 +89,17 @@ public class LoginTest {
         assertFalse(instance.validateUsername(""));
         assertFalse(instance.validateUsername("jih#sa@school.com"));
         assertFalse(instance.validateUsername("cramsay@edinburgh.co.uk"));
+    }
+    @Test
+    public void testValidatePassword() {
+        System.out.println("Validate Password");
+        Login instance = new Login();
+        assertTrue(instance.validatePassword("password"));
+        assertTrue(instance.validatePassword("johnydoe15"));
+        assertTrue(instance.validatePassword("hristoStoichkovOleOle"));
+        assertTrue(instance.validatePassword("12345strongPass"));
+        assertFalse(instance.validatePassword("#sad"));
+        assertFalse(instance.validatePassword("123asdasdlkasdlkadsasdklasdklads12993021iasdklasdnasdklad"));
     }
     
 }
