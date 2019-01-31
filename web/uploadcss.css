@@ -49,10 +49,16 @@ head
 	position:absolute;
 	top:6%;
 	left: 35%;
-	width: 60%;
-	
-	
-}	
+	width: 60%;	
+}
+
+.signaturetable
+{
+	position:absolute;
+	top:50%;
+	left: 35%;
+	width: 60%;	
+}
 div.loginerror
 {
 
@@ -149,6 +155,23 @@ td.comments {
 tr:nth-child(even) .comments {
   background-color: #dddddd;
 }
+
+table.signatures {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td.signatures {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) .signatures {
+  background-color: #dddddd;
+}
+
 .navbar.navbar-default
 {
 	margin:0px;

@@ -35,6 +35,23 @@
             .comments tr:nth-child(even) {
               background-color: #dddddd;
             }
+            
+            table.signatures {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            .signatures td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+
+            .signatures tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+            
         </style>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -77,6 +94,7 @@
                 String pathDraft = path + "-Draft.txt";
                 String pathComments = path + "-Comments.txt";
                 String pathSolutions = path + "-Solutions.txt";
+                String pathSignatures = path + "-Signatures.txt";
                 
                 
             %>
@@ -178,14 +196,46 @@
                 <input type="submit">
             </form>
             <button type="button" onclick="window.location = window.location.href">Reload</button>
+        </div>
+                
+        <div class = signaturetable>
+            <table class="signatures">
+                <tr>
+                    <th>Username</th>
+                    <th>Comment</th>
+                </tr>        
+                    <%
+                        BufferedReader buffRead = new BufferedReader(new FileReader(pathSignatures));
+                        try {
+                            String data;
+                                while((data= buffRead.readLine())!= null)
+                                {
+                                    out.println("<tr>");
+                                    String[] parts = data.split(":", 2);
+                                    for(int i = 0; i < parts.length; i++)
+                                    {
+                                        out.println("<td>" + parts[i] + "</td>");
+                                    }
+                                    out.println("</tr>");
+                                }
+                        }catch(Exception e){
+                        e.printStackTrace();
+                        } finally {
+                            br.close();
+                        }
+                    %>
+            </table>
             
-            <form action="PostSignature" method="SIGN">
-                <textarea name="signature" style="width:175px; height:25px;" placeholder="Please Enter Signature"></textarea>
-                <input type="hidden" name="folderpath" value="<%= pathComments%>">
+            <form action="PostSingature" method="SIGN">
+                <textarea name="comment" style="width:175px; height:25px;" placeholder="Sign here..."></textarea>
+                <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
+                <input type="hidden" name="folderpath" value="<%= pathSignatures%>">
                 <br>
                 <input type="submit">
             </form>
-            
+            <button type="button" onclick="window.location = window.location.href">Reload</button>
         </div>
+                
+                
     </body>
 </html>
