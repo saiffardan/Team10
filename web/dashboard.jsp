@@ -1,3 +1,4 @@
+<%@page import="newpackage.MyExam"%>
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -40,7 +41,7 @@
                     out.println(mail);%>
             </li>
             <br>
-            <li> Not you? <a href = ""> Switch Account </a>  </li>
+            <li> Not you? <a href = "logout.jsp"> Switch Account </a>  </li>
             <br>
             <li> <a href = ""> Change Password </a> </li>
             <br>
@@ -82,24 +83,84 @@
                 %> --%>
                 
         <%
+            String username = (String)session.getAttribute("username");
             int x = 0;
             String name = "";
             String defaultName = "progBar";
             ArrayList exams = (ArrayList ) request.getAttribute("examsList");
+            ArrayList<MyExam> examsConverted = new ArrayList<MyExam>();
+            ArrayList<Integer> internalModIndex = new ArrayList<Integer>();
+            ArrayList<Integer> examVetIndex = new ArrayList<Integer>();
+            ArrayList<Integer> externalModIndex = new ArrayList<Integer>();
             if (exams != null)
             {
                 for (Object exam : exams) {
-                    x++;
-                    name = defaultName.concat(Integer.toString(x));
-                    out.println("<li> <a href = 'Exam?moduleCode=" + exam.toString().split(" - ")[0] + "' >");
-                    out.println(exam.toString());
-                    out.println(" </a> </li>");
-        %>
-                    <div class="progress" style="height: 18px;">
-                        <div id="<%=name%>" class="progress-bar progress-bar-animated" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" >Example</div>
-                    </div>
-        <%
+                        String fields[] = exam.toString().split(",");
+                        int i = 0;
+                        examsConverted.add(new MyExam(fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++], fields[i++]));
+                        if(examsConverted.get(examsConverted.size() - 1).getIntMod().equals(username))
+                        {
+                            internalModIndex.add(examsConverted.size() - 1);
+                        }
+                        if(examsConverted.get(examsConverted.size() - 1).getExVet().equals(username))
+                        {
+                            examVetIndex.add(examsConverted.size() - 1);
+                        }
+                        if(examsConverted.get(examsConverted.size() - 1).getExMod().equals(username))
+                        {
+                            externalModIndex.add(examsConverted.size() - 1);
+                        }
                 }
+                
+                for (int i = 0; i < internalModIndex.size(); i++) {
+                        out.println("<h2> <u>Internal Moderator</u>: </h2>");
+                        x++;
+                        //int index = 
+                        name = defaultName.concat(Integer.toString(x));
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(internalModIndex.get(i)).getModuleCode() + "' >");
+                        out.println(examsConverted.get(internalModIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(internalModIndex.get(i)).getModuleTitle());
+                        out.println(" </a> </li>");
+                    }
+                for (int i = 0; i < examVetIndex.size(); i++) {
+                        out.println("<h2> <u>Exam Vetting Committee</u>: </h2>");
+                        x++;
+                        //int index = 
+                        name = defaultName.concat(Integer.toString(x));
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examVetIndex.get(i)).getModuleCode() + "' >");
+                        out.println(examsConverted.get(examVetIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(examVetIndex.get(i)).getModuleTitle());
+                        out.println(" </a> </li>");
+                    }
+                for (int i = 0; i < externalModIndex.size(); i++) {
+                        out.println("<h2> <u>External Mod</u>: </h2>");
+                        x++;
+                        //int index = 
+                        name = defaultName.concat(Integer.toString(x));
+                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(externalModIndex.get(i)).getModuleCode() + "' >");
+                        out.println(examsConverted.get(externalModIndex.get(i)).getModuleCode() + " - " +  examsConverted.get(externalModIndex.get(i)).getModuleTitle());
+                        out.println(" </a> </li>");
+                    }
+                
+//                for(int i = 0; i < examsConverted.size(); i++)
+//                {
+//                    if(examsConverted.get(i).getIntMod().equals(session.getAttribute("username")))
+//                    {
+//                        out.println("<h2> <u>Internal Moderator</u>: </h2>");
+//                        x++;
+//                        name = defaultName.concat(Integer.toString(x));
+//                        out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(i).getModuleCode() + "' >");
+//                        out.println(examsConverted.get(i).getModuleCode() + " - " +  examsConverted.get(i).getModuleTitle());
+//                        out.println(" </a> </li>");
+//                    }
+//                    
+//                }
+                
+//                for (MyExam exam : examsConverted) {
+//                    x++;
+//                    name = defaultName.concat(Integer.toString(x));
+//                    out.println("<li> <a href = 'Exam?moduleCode=" + exam.get + "' >");
+//                    out.println(exam.toString());
+//                    out.println(" </a> </li>");
+//                }
             }
                              
             out.print("<script> var n; n =");
@@ -111,8 +172,6 @@
         <div class = "historybox">
             <h1> Admin tools </h1>
             <li> <a href = "accountSetting.jsp"> Account Settings</li>
-            <br>
-            <li> <a href = "createAccount.jsp">  Create Account</li>
             <br>
             <li> <a href = "exam.jsp">Full Exam listing</li>
             <br>
