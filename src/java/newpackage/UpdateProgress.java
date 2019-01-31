@@ -48,6 +48,7 @@ public class UpdateProgress extends HttpServlet {
             Connection conn = null;
             Statement st = null;
             ResultSet rs = null;
+            //out.print(query);
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();   
                 String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
@@ -71,6 +72,7 @@ public class UpdateProgress extends HttpServlet {
                     Logger.getLogger(ExecuteQuery.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 request.getRequestDispatcher(redirectTo).forward(request, response);
+                //response.sendRedirect(redirectTo);
                 }
         }
         
