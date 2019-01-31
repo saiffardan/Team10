@@ -23,7 +23,8 @@
                     <img alt="Uni of Dundee crest" src="Dundeebadge.png" height="50" width="50"> 
                 </a>
             </div>
-            Hello cramsay@dundee.ac.uk!
+            Hello <% String mail=(String)session.getAttribute("username");
+                    out.println(mail);%>
             <a href="logout.jsp"> <button type="button" class="btn btn-default navbar-btn"style="float:right">Logout</button>  </a>
             </div>
         </nav>
@@ -37,7 +38,7 @@
             <h1> Account settings </h1>
             <br>
             <li> Current account: 
-                    <% String mail=(String)session.getAttribute("username");
+                    <% //String mail=(String)session.getAttribute("username");
                     out.println(mail);%>
             </li>
             <br>
