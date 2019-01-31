@@ -24,9 +24,9 @@ import static org.mockito.Mockito.when;
  *
  * @author Kaloyan
  */
-public class LoginTest {
+public class ValidatorTest {
     
-    public LoginTest() {
+    public ValidatorTest() {
     }
     
     @BeforeClass
@@ -79,27 +79,25 @@ public class LoginTest {
     @Test
     public void testValidateUsername() {
         System.out.println("Validate Username");
-        Login instance = new Login();
-        assertTrue(instance.validateUsername("cramsay@dundee.ac.uk"));
-        assertTrue(instance.validateUsername("josh64@dundee.ac.uk"));
-        assertFalse(instance.validateUsername("cramsaydundee.ac.uk"));
-        assertFalse(instance.validateUsername("cramsay@dundee.ac"));
-        assertFalse(instance.validateUsername("cramsay@dundee.com"));
-        assertFalse(instance.validateUsername("sadsadasdsadssaddasdasdasdsadsasdadsaadawqadsfdasfewfasdfawefasdfasdmasmdsmamasmasdmadsmasdasdmadasdmsadsdaasdads@dundee.ac.uk"));
-        assertFalse(instance.validateUsername(""));
-        assertFalse(instance.validateUsername("jih#sa@school.com"));
-        assertFalse(instance.validateUsername("cramsay@edinburgh.co.uk"));
+        assertTrue(Validator.validateUsername("cramsay@dundee.ac.uk"));
+        assertTrue(Validator.validateUsername("josh64@dundee.ac.uk"));
+        assertFalse(Validator.validateUsername("cramsaydundee.ac.uk"));
+        assertFalse(Validator.validateUsername("cramsay@dundee.ac"));
+        assertFalse(Validator.validateUsername("cramsay@dundee.com"));
+        assertFalse(Validator.validateUsername("sadsadasdsadssaddasdasdasdsadsasdadsaadawqadsfdasfewfasdfawefasdfasdmasmdsmamasmasdmadsmasdasdmadasdmsadsdaasdads@dundee.ac.uk"));
+        assertFalse(Validator.validateUsername(""));
+        assertFalse(Validator.validateUsername("jih#sa@school.com"));
+        assertFalse(Validator.validateUsername("cramsay@edinburgh.co.uk"));
     }
     @Test
     public void testValidatePassword() {
         System.out.println("Validate Password");
-        Login instance = new Login();
-        assertTrue(instance.validatePassword("password"));
-        assertTrue(instance.validatePassword("johnydoe15"));
-        assertTrue(instance.validatePassword("hristoStoichkovOleOle"));
-        assertTrue(instance.validatePassword("12345strongPass"));
-        assertFalse(instance.validatePassword("#sad"));
-        assertFalse(instance.validatePassword("123asdasdlkasdlkadsasdklasdklads12993021iasdklasdnasdklad"));
+        assertTrue(Validator.validatePassword("password"));
+        assertTrue(Validator.validatePassword("johnydoe15"));
+        assertTrue(Validator.validatePassword("hristoStoichkovOleOle"));
+        assertTrue(Validator.validatePassword("12345strongPass"));
+        assertFalse(Validator.validatePassword("#sad"));
+        assertFalse(Validator.validatePassword("123asdasdlkasdlkadsasdklasdklads12993021iasdklasdnasdklad"));
     }
     
 }
