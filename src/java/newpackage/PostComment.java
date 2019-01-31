@@ -44,13 +44,30 @@ public class PostComment extends HttpServlet {
             if(request.getParameter("comment") != null){
                 String username = request.getParameter("username");
                 String strPath = request.getParameter("folderpath");
+                String role = request.getParameter("role");
+                if(role.equals("intMod"))
+                {
+                    role = "Internal Moderator";
+                }
+                else if(role.equals("exVet"))
+                {
+                    role = "Exam Vetter";
+                }
+                else if(role.equals("exMod"))
+                {
+                    role = "External Moderator";
+                }
+                else if(role.equals("exSet"))
+                {
+                    role = "Exam Setter";
+                }
                 //File creation
                 File strFile = new File(strPath);
                 boolean fileCreated = strFile.isFile();
                 strFile.createNewFile();
                 //File appending
                 Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
-                objWriter.write(username + ": ");
+                objWriter.write(username + "(" + role + ")" + ": ");
                 objWriter.write(request.getParameter("comment").toString() + "\r\n");
                 objWriter.flush();
                 objWriter.close();

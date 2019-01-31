@@ -43,6 +43,7 @@ public class Exam extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String redirectTo = "exam.jsp";
             String moduleCode = (String)request.getParameter("moduleCode");
+            String role = (String)request.getParameter("role");
             String query = "SELECT moduleCode, moduleTitle, author, year, semester, paperType, examType, level, status FROM exam WHERE moduleCode = '" + moduleCode + "'";
             Connection conn = null;
             Statement st = null;
@@ -60,10 +61,13 @@ public class Exam extends HttpServlet {
                     for (int i = 1; i < 10; i++) {
                         list.add(rs.getString(i));
                     }
-                    exam = new MyExam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                    //exam = new MyExam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                    //int i = 1;
+                    //exam = new MyExam(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
                 }
-                request.setAttribute("exam", exam);
+                //request.setAttribute("exam", exam);
                 request.setAttribute("list", list);
+                request.setAttribute("role", role);
                 //out.println(exams);
                 
                 

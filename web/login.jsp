@@ -54,6 +54,7 @@
                     String rowParts[] = row.toString().split(" ");
                     email = rowParts[0];
                     password = rowParts[1];
+                    
                 }
             }
             
