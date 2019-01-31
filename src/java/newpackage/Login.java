@@ -40,18 +40,19 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, IllegalArgumentException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             String redirectTo = "login.jsp";
             String username = request.getParameter("username");
-            if(!validateUsername(username)) {
-                username = "invalid";
+            if(!Validator.validateUsername(username)) {
+                throw new IllegalArgumentException("Invalid Login Username!");
             }
             String passwordGuess = request.getParameter("password");
-            //test password
-            
+            if (!Validator.validatePassword(passwordGuess)) {
+                throw new IllegalArgumentException("Invalid Login Password!");
+            }
             
             String password = "";
             //request.setAttribute("passwordGuess", password);
@@ -141,48 +142,5 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public boolean validateUsername (String username) {
-        boolean valid = false;
-        if (username.length() > 13 && username.length() < 100) {
-            valid = true;
-        } else {
-            return false;
-        }
-        if (username.contains("@")) {
-            valid = true;
-        } else {
-            return false;
-        }
-        if (username.contains("dundee.ac.uk")) {
-            valid = true;
-        } else {
-            return false;
-        }
-        if (username.contains("#")) {
-            return false;
-        }
-        if (username.isEmpty()) {
-            return false;
-        }
-        if (username.indexOf("@") > 1) {
-            return true;
-        }
-        return valid;
-    }
-    public boolean validatePassword(String password) {
-        boolean valid = true;
-        if (password.isEmpty()) {
-            return false;
-        }
-        if (password.contains("#")) {
-            return false;
-        }
-        if (password.contains("@")) {
-            return false;
-        }
-        if (password.length() > 30) {
-            return false;
-        }
-        return valid;
-    }
+    
 }
