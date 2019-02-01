@@ -188,10 +188,10 @@
                         </tr>
                     </table>
                     
-                    <form action="PostComment" method="SIGN">
+                    <form action="PostComment" method="POST">
                         <textarea name="comment" style="width:175px; height:25px;" placeholder="Sign here..."></textarea>
-                        <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
-                        <input type="hidden" name="folderpath" value="<%= pathComments%>">
+                        <input type="hidden" name="username" value=" <%= session.getAttribute("username")%>">
+                        <input type="hidden" name="folderpath" value="<%=("<i> This has been signed by </i>" + pathComments%>">
                         <br>
                         <input type="submit">
                     </form>

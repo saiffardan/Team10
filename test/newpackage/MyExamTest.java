@@ -32,6 +32,7 @@ public class MyExamTest {
     @Before
     public void setUp() {
         instance = new MyExam(
+                "106",
                 "Agile Software Engineering",
                 "AC31007",
                 "Kaloyan Marshalov",
@@ -40,7 +41,11 @@ public class MyExamTest {
                 "Main",
                 "Undergraduate",
                 "Online",
-                "21 June"
+                "21 June",
+                "Saif",
+                "John",
+                "Dancho",
+                "New"
         );
     }
     
@@ -126,6 +131,13 @@ public class MyExamTest {
         assertEquals(expResult, result);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetSemester_throwException() {
+        System.out.println("Test Set Semester with illegal argument");
+        String semester = "Third";
+        instance.setSemester(semester);
+    }
+    
     /**
      * Test of setSemester method, of class MyExam.
      */
@@ -136,7 +148,7 @@ public class MyExamTest {
         instance.setSemester(semester);
         assertEquals(semester, instance.getSemester());
     }
-
+    
     /**
      * Test of getYear method, of class MyExam.
      */

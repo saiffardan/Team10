@@ -119,7 +119,11 @@ public class MyExam extends Object{
     }
 
     public void setSemester(String semester) {
-        this.semester = semester;
+        if (semester.equals("First") || semester.equals("Second")) {
+            this.semester = semester;  
+        } else {
+            throw new IllegalArgumentException("Illegal semester field, needs to be First or Second!");
+        }
     }
 
     public String getYear() {
