@@ -77,11 +77,19 @@
             <br>
             <li> <a href = "">Exam Progress Tracker</a> </li>
             <%
-                
+                if(session.getAttribute("admin").equals("1"))
+                {
+                    %>
+                    <h2> Admin Tools </h2>
+                    <br>
+                    <li> <a href = "accountSetting.jsp"> Account Settings</li>
+                    <li> <a href = "exam.jsp">Full Exam listing</li>
+                    <br>
+                    <%
+                }
                 %>
-            <h2> Admin Tools </h2>
-            <br>
-            <li> <a href = "">  </a> </li>
+            
+        </div>
             <br>    
         </div>
 		
@@ -202,11 +210,6 @@
         
 	<a href="createexam.jsp"> <button type="button" class="btn btn-default navbar-btn">Upload New</button>  </a>
 	</div>
-        <div class = "historybox">
-            <h1> Admin tools </h1>
-            <li> <a href = "accountSetting.jsp"> Account Settings</li>
-            <li> <a href = "exam.jsp">Full Exam listing</li>
-            <br>
-        </div>
+        
     </body>
 </html>

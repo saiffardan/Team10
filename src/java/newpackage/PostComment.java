@@ -45,6 +45,7 @@ public class PostComment extends HttpServlet {
                 String username = request.getParameter("username");
                 String strPath = request.getParameter("folderpath");
                 String role = request.getParameter("role");
+                String whatToWrite = "";
                 if(role.equals("intMod"))
                 {
                     role = "Internal Moderator";
@@ -67,8 +68,19 @@ public class PostComment extends HttpServlet {
                 strFile.createNewFile();
                 //File appending
                 Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
-                objWriter.write(username + "(" + role + ")" + ": ");
-                objWriter.write(request.getParameter("comment").toString() + "\r\n");
+                
+                if(request.getParameter("signatureButton") != null)
+                {
+                    whatToWrite = "<i> This has been signed by " + username + "</i> :" + "\r\n";
+                }
+                else
+                {
+                    whatToWrite = username + "(" + role + ")" + ": " + request.getParameter("comment").toString() + "\r\n";
+                }
+//                objWriter.write(username + "(" + role + ")" + ": ");
+//                objWriter.write(request.getParameter("comment").toString() + "\r\n");
+                //out.println(whatToWrite);
+                objWriter.write(whatToWrite);
                 objWriter.flush();
                 objWriter.close();
                 //request.getRequestDispatcher("exam.jsp").forward(request, response);

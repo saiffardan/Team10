@@ -68,7 +68,7 @@ public class Exam extends HttpServlet {
                 //request.setAttribute("exam", exam);
                 request.setAttribute("list", list);
                 request.setAttribute("role", role);
-                //out.println(exams);
+                //out.println(list);
                 
                 
             } catch (Exception e) {

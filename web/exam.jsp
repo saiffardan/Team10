@@ -39,7 +39,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                <a href="dashboard.jsp">
+                <a href="Dashboard">
                     <img alt="Uni of Dundee crest" src="Dundeebadge.png" height="50" width="50"> 
                 </a>
                 </div>
@@ -139,7 +139,7 @@
             </form>
              
         </div>
-                            
+                           
               
                
         <div class = commenttable>
@@ -170,33 +170,33 @@
                     %>
             </table>
             
-            <form action="PostComment" method="POST">
+           <form action="PostComment" method="POST">
                 <textarea name="comment" style="width:300px; height:100px;" placeholder="Leave comment here..."></textarea>
                 <input type="hidden" name="username" value="<%= session.getAttribute("username")%>">
                 <input type="hidden" name="role" value="<%= role%>">
                 <input type="hidden" name="folderpath" value="<%= pathComments%>">
                 <br>
-                <input type="submit">
+                <input type="submit" name="commentButton">
             </form>
             <button type="button" onclick="window.location = window.location.href">Reload</button>
         </div>
                 
-                <div class = signature>
-                    <table class ="signatures">
-                        <tr>
-                            <th>Signature</th>
-                        </tr>
-                    </table>
-                    
-                    <form action="PostComment" method="POST">
-                        <textarea name="comment" style="width:175px; height:25px;" placeholder="Sign here..."></textarea>
-                        <input type="hidden" name="username" value=" <%= session.getAttribute("username")%>">
-                        <input type="hidden" name="folderpath" value="<%=("<i> This has been signed by </i>" + pathComments%>">
-                        <br>
-                        <input type="submit">
-                    </form>
-                        <button type="button" onclick="window.location = window.location.href">Reload</button>
-                </div>
+            <div class = "signature" style="width:200px">
+            <table class ="signatures">
+                <tr>
+                    <th>Signature</th>
+                </tr>
+            </table>
+
+            <form action="PostComment" method="POST">
+                <textarea name="comment" style="width:175px; height:25px;" placeholder="Sign here..."></textarea>
+                <input type="hidden" name="username" value=" <%= session.getAttribute("username")%>">
+                <input type="hidden" name="role" value="<%= role%>">
+                <input type="hidden" name="folderpath" value="<%= pathComments%>">
+                <br>
+                <input type="submit" name="signatureButton">
+            </form>
+            </div>
                 
     </body>
 </html>

@@ -53,8 +53,9 @@ public class Login extends HttpServlet {
             
             String password = "";
             String username = "";
+            String admin = "";
             //request.setAttribute("passwordGuess", password);
-            String query = "SELECT username, password FROM users WHERE email='"+email+"'";
+            String query = "SELECT username, password, admin FROM users WHERE email='"+email+"'";
             
             Connection conn = null;
             Statement st = null;
@@ -69,6 +70,7 @@ public class Login extends HttpServlet {
                 {
                     password = rs.getString(2);
                     username = rs.getString(1);
+                    admin = rs.getString(3);
                 }
                 
                 HttpSession session = request.getSession();
@@ -77,6 +79,13 @@ public class Login extends HttpServlet {
                 {
                     session.setAttribute("username", username);
                     session.setAttribute("email", email);
+                    if(admin.equals("1")){
+                        session.setAttribute("admin", "1");
+                    }
+                    else
+                    {
+                        session.setAttribute("admin", "0");
+                    }
                     redirectTo = "Dashboard";
                     //response.sendRedirect("Dashboard");
                 }
