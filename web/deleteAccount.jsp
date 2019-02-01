@@ -19,29 +19,20 @@
                 
                  Connection conn = DriverManager.getConnection(connName,username,password);
                 Statement st = conn.createStatement();
-             
-               
                 
                 if(request.getParameter("Submit") != null) {
                     PreparedStatement ps = null;
-                    //PreparedStatement pss = null;
                     String id = request.getParameter("View");
-                    String qry = "DELETE u, r FROM users u JOIN roles r ON u.userID = r.userID WHERE u.userID =?";
-                   // String qry = "DELETE FROM users WHERE userID =?";
-                     //String qrys = "DELETE FROM roles WHERE userID =?";
+                    String qry = "DELETE FROM users WHERE userID = " + id;
                     ps = conn.prepareStatement(qry);
-                    //pss = con.prepareStatement(qrys);
-                    ps.setString(1, id);
-                    //pss.setString(1, id);
                     ps.executeUpdate();
-                    //pss.executeUpdate();
                 } else if(request.getParameter("View") != null){    
                     String id = request.getParameter("View");
                     Integer id1 = Integer.parseInt(id);
                     ResultSet rss = st.executeQuery("SELECT * FROM users WHERE userID='"+id1+"'");
                     rss.next();    
         %>
-        <form action="accountSetting.jsp?delete" method="GET">
+        <form action="accountSetting.jsp?delete=&View=<%=id1%>" method="POST">
             <table class="table table-striped">
                 <tr>
                     <th>UserName</th><th>Password</th><th>Email</th>
@@ -52,14 +43,13 @@
                     <td>&nbsp;<%= rss.getString("email") %>&nbsp;</td>
                 </tr>
                 <tr> 
-                    <td colspan="3"><input type="hidden" name="View" value="<%=id1%>"><input type="Submit" name="Submit" value="Delete"></td>
+                    <td colspan="3"><input type="hidden" name="View" value="<%=id1%>">
+                        <input type="Submit" name="Submit" value="Delete"></td>
                 </tr>
             </table>  
         </form>
         <% 
-             
                 }
-
                 String query = "SELECT * FROM users";
                 Integer n = 0;
                 ResultSet rs = st.executeQuery(query);
@@ -89,4 +79,4 @@
                 out.println(e);
             }
         %>
-		</div>
+</div>

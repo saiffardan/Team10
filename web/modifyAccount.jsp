@@ -8,38 +8,29 @@
 <div class="accsetchoice">
  <h3>Modify User Record</h3>
  <%        
-          try{
-         
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
+          try{ Class.forName("com.mysql.jdbc.Driver").newInstance();
                 String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
                 String username = "18agileteam10";
                 String password = "7621.at10.1267";
                
                 Connection conn = DriverManager.getConnection(connName,username,password);
                 Statement st = conn.createStatement();
-             
                 
-                  
-                
-            if(request.getParameter("Submit")!= null){
-                PreparedStatement ps = null;
- 
-                String id = request.getParameter("View");
-                String pass = request.getParameter("password");
-                String user = request.getParameter("username");
-                String mail = request.getParameter("email");
-                String qry = "Update users set username=?, password=?, email=? where userID="+id;
-                ps = conn.prepareStatement(qry);
-                ps.setString(3, mail);
-                ps.setString(1, user);
-                ps.setString(2, pass);
-                int i = ps.executeUpdate();
-                if(i > 0){
-                    out.println("WORKS!!");
-                }else {
-                    out.println("NOT!!");
+                if(request.getParameter("Submit")!= null){
+                    PreparedStatement ps = null;
+                    String id = request.getParameter("View");
+                    String pass = request.getParameter("password");
+                    String user = request.getParameter("username");
+                    String mail = request.getParameter("email");
+                    String qry = "UPDATE users SET username = '" + user + "', password = '" + pass + "', email = '" + mail + "' WHERE userID = " + id;
+                    ps = conn.prepareStatement(qry);
+                    int i = ps.executeUpdate();
+                    if(i > 0){
+                        out.println("WORKS!!");
+                    }else {
+                        out.println("NOT!!");
+                    }
                 }
-            }
 
             if(request.getParameter("View")!= null){
                 String id = request.getParameter("View");
@@ -58,7 +49,7 @@
             <td>&nbsp;<%= rss.getString("email") %>&nbsp;</td>
             </tr>
         </table>
-        <form name="forms" action="accountSetting.jsp?modify" method="GET">
+        <form name="forms" action="accountSetting.jsp?modify=&View=<%=id1%>" method="POST">
             <table class="table table-striped">
                 <tr>
                     <td>Username</td>
@@ -73,7 +64,8 @@
                     <td><input type="text" name="email" value="" placeholder="Enter New Email" required="required"></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="hidden" name="View" value="<%=id1%>"><input type="Submit" name="Submit" value="Modify"></td>
+                    <td colspan="2"><input type="hidden" name="View" value="<%=id1%>">
+                    <input type="Submit" name="Submit" value="Modify"></td>
                 </tr>
             </table>
         </form>

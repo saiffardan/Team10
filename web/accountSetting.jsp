@@ -40,7 +40,7 @@
             <tr>
                 <td style="width: 10%; background-color: #dddddd;">
                     <ul>
-                        <li><a href="accountSetting.jsp?create">  Create Account</a></li>
+                        <li><a href="accountSetting.jsp?create=5">  Create Account</a></li>
                         <li><a href="accountSetting.jsp?assign">  Create Roles</a></li>
                           <li><a href="accountSetting.jsp?modify">  Modify Account</a></li>
                           <li><a href="accountSetting.jsp?delete">  Delete Account</a></li>
