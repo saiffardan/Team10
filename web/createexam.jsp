@@ -3,6 +3,12 @@
     Created on : 23-Jan-2019, 12:38:37
     Author     : danchoatanasov
 --%>
+<%@page import="java.io.File"%>
+<%@page import="java.text.DateFormatSymbols"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page import="java.sql.Statement"%>
@@ -37,39 +43,68 @@
          
             // if(request.getParameter("comment") != null){
         if(request.getParameter("submit")!= null){
-    try{
-                /* try{*/     
-        String modulecode = request.getParameter("modulecode");   
-        String moduletitle = request.getParameter("moduletitle"); 
-        String author = request.getParameter("author"); 
-        String year = request.getParameter("year");  
-        String semester = request.getParameter("semester");
-        String platform = request.getParameter("platform");
-        String examtype = request.getParameter("examtype");
-        String level = request.getParameter("level");
-        String id = "3";
-        String status = "";
-        Date d1 = new Date();
-        
-        
-        Class.forName("com.mysql.jdbc.Driver").newInstance();   
-       String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
-       Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
-       Statement st = conn.createStatement();
-                 st.executeUpdate("insert into exams(exid, modulecode, moduletitle, author, year, semester, platform, examtype, level, date, status)"
-               + "values('"+id+"', '"+modulecode+"','"+moduletitle+"','"+author+"','"+year+"','"+semester+"','"+platform+"','"+examtype+"','"+level+"', '"+d1+"', '"+status+"')");
-       out.println("Succcessful");
+             try{   
+                String modulecode = request.getParameter("modulecode");   
+                String moduletitle = request.getParameter("moduletitle"); 
+                String author = request.getParameter("author"); 
+                String year = request.getParameter("year");  
+                String semester = request.getParameter("semester");
+                String papertype = request.getParameter("platform");
+                String examtype = request.getParameter("examtype");
+                String level = request.getParameter("level");
+                String status =  "New";
+                String intMod =  "";
+                String exVet =  "";
+                String exMod =  "";
+
+
+                Date date = Calendar.getInstance().getTime();  
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYY");
+                String strDate = dateFormat.format(date); 
+
+                Class.forName("com.mysql.jdbc.Driver").newInstance();   
+                String connName = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/18agileteam10db";
+                Connection conn = DriverManager.getConnection(connName,"18agileteam10","7621.at10.1267");
+                Statement st = conn.createStatement();
+                PreparedStatement ps = null;
+                String qry = "insert into exam(moduleTitle, moduleCode, author, semester, year, examType, level, paperType, date, intMod, exVet, exMod, status)  values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                ps = conn.prepareStatement(qry);
+                ps.setString(1, moduletitle);
+                ps.setString(2, modulecode);
+                ps.setString(3, author);
+                ps.setString(4, semester);
+                ps.setString(5, year);
+                ps.setString(6, examtype);
+                ps.setString(7, level); 
+                ps.setString(8, papertype);
+                ps.setString(9, strDate);
+                ps.setString(10, intMod);
+                ps.setString(11, exVet);
+                ps.setString(12, exMod);
+                ps.setString(13, status);
+
+
+                int i = ps.executeUpdate();
+    //            if(i > 0){
+    //                out.println("WORKS!!");
+    //            }else {
+    //                out.println("NOT!!");
+    //            }
+                String path = getServletContext().getRealPath("/") + "/exams/" + modulecode + "_" + year;
+                new File(path).mkdirs();
+                String commentPath = path + "/" + modulecode + "-Comments.txt";
+                File commentFile = new File(commentPath);
+                commentFile.createNewFile();
        
           
-    }catch(Exception e){
+            }        
+             catch(Exception e){
             out.println(e);
             }
             
             
         }
-        
-        // <form class="form-signup" action="CreateNewExam" method="post">
-        //<input type="text" id="inputAuthor" name="author" value="<%= session.getAttribute("username")">
         %>
         
         <div class=container>

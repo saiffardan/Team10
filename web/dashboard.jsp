@@ -119,8 +119,9 @@
                         }
                 }
                 
+                out.println("<p> Exam Setter: </p>");
                 for (int i = 0; i < examSetIndex.size(); i++) {
-                    out.println("<p> Exam Setter: </p>");
+                    
                     x++;
                     name = defaultName.concat(Integer.toString(x));
                     out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examSetIndex.get(i)).getModuleCode() + "&role=exSet" +  "' >");
@@ -134,8 +135,9 @@
                         </div>
                     <%
                 }
+                out.println("<p> Internal Mod: </p>");
                 for (int i = 0; i < internalModIndex.size(); i++) {
-                        out.println("<p> Internal Mod: </p>");
+                        
                         x++;
                         name = defaultName.concat(Integer.toString(x));
                         out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(internalModIndex.get(i)).getModuleCode() + "&role=intMod" +  "' >");
@@ -150,8 +152,9 @@
                         <%
                        
                     }
+                out.println("<p> Exam Vetting: </p>");
                 for (int i = 0; i < examVetIndex.size(); i++) {
-                        out.println("<p> Exam Vetting: </p>");
+                        
                         x++;
                         name = defaultName.concat(Integer.toString(x));
                         out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(examVetIndex.get(i)).getModuleCode() + "&role=exVet" + "' >");
@@ -166,8 +169,9 @@
                         <%
                        
                     }
+                out.println("<p> External Mod: </p>");
                 for (int i = 0; i < externalModIndex.size(); i++) {
-                        out.println("<p> External Mod: </p>");
+                        
                         x++;
                         name = defaultName.concat(Integer.toString(x));
                         out.println("<li> <a href = 'Exam?moduleCode=" + examsConverted.get(externalModIndex.get(i)).getModuleCode() + "&role=exMod" + "' >");

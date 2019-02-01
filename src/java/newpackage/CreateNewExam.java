@@ -50,33 +50,30 @@ public class CreateNewExam extends HttpServlet {
                 String main = request.getParameter("main");
                 String undergrad = request.getParameter("undergrad");
                 //File creation
-                //String strPath = "C:/apache-tomcat-8.0.18/tomcat1/webapps/2018-agileteam10/exams/newcomment.txt";
-                //String strPath = "/exams/newcomment.txt";
                 String path = getServletContext().getRealPath("/") + "/exams/" + moduleCode + "_" + year;
-                
                 new File(path).mkdirs();
-                String strPath = path + "/" + moduleCode + "-Info.txt";
+                //String strPath = path + "/" + moduleCode + "-Info.txt";
                 String commentPath = path + "/" + moduleCode + "-Comments.txt";
-                File strFile = new File(strPath);
+                //File strFile = new File(strPath);
                 File commentFile = new File(commentPath);
-                boolean fileCreated = strFile.isFile();
-                strFile.createNewFile();
+                //boolean fileCreated = strFile.isFile();
+                //strFile.createNewFile();
                 commentFile.createNewFile();
-                //File appending
-                Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
-                objWriter.write(moduleCode + "\r\n");
-                objWriter.write(moduleTitle + "\r\n");
-                objWriter.write(author + "\r\n");
-                objWriter.write(year + "\r\n");
-                objWriter.write(semester + "\r\n");
-                objWriter.write(online + "\r\n");
-                objWriter.write(main + "\r\n");
-                objWriter.write(undergrad + "\r\n");
-                objWriter.write("New" + "\r\n");
-                objWriter.flush();
-                objWriter.close();
+//                //File appending
+//                Writer objWriter = new BufferedWriter(new FileWriter(strFile, true));
+//                objWriter.write(moduleCode + "\r\n");
+//                objWriter.write(moduleTitle + "\r\n");
+//                objWriter.write(author + "\r\n");
+//                objWriter.write(year + "\r\n");
+//                objWriter.write(semester + "\r\n");
+//                objWriter.write(online + "\r\n");
+//                objWriter.write(main + "\r\n");
+//                objWriter.write(undergrad + "\r\n");
+//                objWriter.write("New" + "\r\n");
+//                objWriter.flush();
+//                objWriter.close();
                 //request.getRequestDispatcher("exam.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/Dashboard");
             }
         }
     }

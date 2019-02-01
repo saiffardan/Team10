@@ -125,7 +125,7 @@
                 }
                 if(progress.equals("Exam Vetting") && role.equals("exVet")){
                 %>
-                    <input type="hidden" name="changeTo" value="Exam Vetting">
+                    <input type="hidden" name="changeTo" value="External Moderation">
                     <input type="submit" value="Send to External Moderator"/>
                     <%
                 }
