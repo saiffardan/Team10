@@ -34,10 +34,10 @@
                 
 	<h1>Welcome! Please log in</h1>
     <form action="Login" method="post">
-        <label for="email">Email </label>
+        <label for="email">Email &emsp;&ensp;&nbsp;:</label>
         <input name="email" type="text">
 		<br>
-        <label for="password">Password </label>
+        <label for="password">Password:</label>
         <input name="password" type="password">
 		<br>
         <input type="submit" type="button" name= "login" value="Login" class="btn btn-default navbar-btn"</button>
