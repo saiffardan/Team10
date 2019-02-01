@@ -73,17 +73,17 @@
             <li> <a href = ""> Change Password </a> </li>
             <br>
             <br>
-            <h2> Staff Tools </h2>
+            <h2> School Office Tools </h2>
             <br>
-            <li> <a href = "">Exam Progress Tracker</a> </li>
+            <li> <a href = "completedExams.jsp">Completed Exams</a> </li>
             <%
                 if(session.getAttribute("admin").equals("1"))
                 {
                     %>
                     <h2> Admin Tools </h2>
                     <br>
-                    <li> <a href = "accountSetting.jsp"> Account Settings</li>
-                    <li> <a href = "exam.jsp">Full Exam listing</li>
+                    <li> <a href = "accountSetting.jsp"> Account Settings </a></li>
+                    <li> <a href = "fullExamList.jsp">Full Exam listing </a></li>
                     <br>
                     <%
                 }

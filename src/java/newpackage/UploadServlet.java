@@ -30,7 +30,8 @@ public class UploadServlet extends HttpServlet {
     
     private boolean isMultipart;
     private String filePath;
-    private int maxFileSize = 50 * 1024;
+    //private int maxFileSize = 50 * 1024;
+    private int maxFileSize = 650 * 1024;
     private int maxMemSize = 4 * 1024;
     private File file ;
     
@@ -61,7 +62,8 @@ public class UploadServlet extends HttpServlet {
             factory.setSizeThreshold(maxMemSize);
 
             // Location to save data that is larger than maxMemSize.
-            factory.setRepository(new File(getServletContext().getRealPath("/").substring(0,2)));
+            factory.setRepository(new File(getServletContext().getRealPath("/") + "/tempfile.pdf"));
+            
 
             // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
